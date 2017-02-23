@@ -63,26 +63,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
-/***/ (function(module, exports, __webpack_require__) {
-
-var UI = __webpack_require__(136);
-
-var app = function(){
-  new UI();
-};
-
-window.onload = app;
-
-
-/***/ }),
-
-/***/ 136:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports) {
 
 var UI = function(){
@@ -99,7 +84,19 @@ UI.prototype = {
 module.exports = UI;
 
 
-/***/ })
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/******/ });
+var UI = __webpack_require__(0);
+
+var app = function(){
+  new UI();
+};
+
+window.onload = app;
+
+
+/***/ })
+/******/ ]);
 //# sourceMappingURL=bundle.js.map

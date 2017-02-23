@@ -13,6 +13,10 @@ db.journalEntries.insert(
       entryNumber: 2,
       timestamp: 'Fri Feb 24 2098 14:30:12',
       content: 'This mission has really dragged on, I haven\'t used this nearly enough!...'
+    },
+    {
+      entryNumber: "entry number counter",
+      currentEntryNumber: 2
     }
   ]
 );

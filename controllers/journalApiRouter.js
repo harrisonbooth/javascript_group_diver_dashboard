@@ -3,6 +3,8 @@ var journalRouter = express.Router();
 
 var JournalQuery = require('../client/db/journalQuery');
 var journalQuery = new JournalQuery();
+var JournalEntry = require('../client/src/models/journalEntry');
+
 
 journalRouter.get('/:id', function(req, res){
   var desiredEntryNumber = parseInt(req.params.id);
@@ -16,6 +18,16 @@ journalRouter.get('/', function(req, res){
     res.json(returnedEntries);
   });
 });
+
+journalRouter.post('/', function(req, res){
+  var content = req.body.content;
+  var newEntry = new JournalEntry(content)
+  journalQuery.newEntry(newEntry, function(returnedEntries){
+    res.json(returnedEntries);
+  });
+});
+
+
 
 
 
