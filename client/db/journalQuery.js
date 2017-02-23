@@ -42,6 +42,19 @@ JournalQuery.prototype = {
         }.bind(this));
       }
     });
+  }, 
+
+  updateEntry: function(desiredEntryNumber, updateContent, onQueryFinished){
+    MongoClient.connect(this.url, function(err, db){
+      if(db){
+        var collection = db.collection('journalEntries');
+        var newTimestamp = Date().substring(0, 24);
+        collection.update({entryNumber: desiredEntryNumber}, {entryNumber: desiredEntryNumber, content: updateContent, timestamp: newTimestamp});
+        collection.find().toArray(function(err, entryDocs){
+          onQueryFinished(entryDocs);
+        });
+      }
+    })
   }
 }
 

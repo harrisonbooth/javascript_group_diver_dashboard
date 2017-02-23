@@ -27,6 +27,14 @@ journalRouter.post('/', function(req, res){
   });
 });
 
+journalRouter.put('/:id', function(req, res){
+  var newContent = req.body.content;
+  var desiredEntryNumber = parseInt(req.params.id);
+  journalQuery.updateEntry(desiredEntryNumber, newContent, function(returnedEntries){
+    res.json(returnedEntries);
+  }); 
+});
+
 
 
 
