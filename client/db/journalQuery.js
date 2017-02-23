@@ -55,7 +55,20 @@ JournalQuery.prototype = {
         });
       }
     })
-  }
+  }, 
+
+  deleteEntry: function(desiredEntryNumber, onQueryFinished){
+    MongoClient.connect(this.url, function(err, db){
+      if(db){
+        var collection = db.collection('journalEntries');
+        collection.remove({entryNumber: desiredEntryNumber});
+        collection.find().toArray(function(err, entryDocs){
+          onQueryFinished(entryDocs);
+        });
+      }
+    })
+  }, 
+
 }
 
 

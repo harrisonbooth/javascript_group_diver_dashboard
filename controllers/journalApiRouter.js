@@ -35,6 +35,13 @@ journalRouter.put('/:id', function(req, res){
   }); 
 });
 
+journalRouter.delete('/:id', function(req, res){
+  var desiredEntryNumber = parseInt(req.params.id);
+  journalQuery.deleteEntry(desiredEntryNumber, function(returnedEntries){
+    res.json(returnedEntries);
+  }) 
+})
+
 
 
 
