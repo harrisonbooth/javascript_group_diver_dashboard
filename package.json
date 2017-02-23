@@ -1,0 +1,29 @@
+{
+  "name": "diver_dashboard",
+  "version": "1.0.0",
+  "description": "An information dashboard for deepsea divers",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha ./client/src/models/specs",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harrisonbooth/javascript_group_diver_dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harrisonbooth/javascript_group_diver_dashboard/issues"
+  },
+  "homepage": "https://github.com/harrisonbooth/javascript_group_diver_dashboard#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "mongodb": "^2.2.24"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0"
+  }
+}
