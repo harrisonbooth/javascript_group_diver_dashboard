@@ -66,12 +66,40 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
+/***/ (function(module, exports, __webpack_require__) {
+
+var UI = __webpack_require__(136);
+
+var app = function(){
+  new UI();
+};
+
+window.onload = app;
+
+
+/***/ }),
+
+/***/ 136:
 /***/ (function(module, exports) {
 
+var UI = function(){
+
+
+};
+
+UI.prototype = {
+  render: function(){
+
+  }
+}
+
+module.exports = UI;
 
 
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=bundle.js.map
