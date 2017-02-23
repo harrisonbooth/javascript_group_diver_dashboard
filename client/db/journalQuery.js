@@ -16,7 +16,16 @@ JournalQuery.prototype = {
     });
   },
 
-  
+  findByEntryNumber: function(desiredEntryNumber, onQueryFinished){
+    MongoClient.connect(this.url, function(err, db){
+      if(db){
+        var collection = db.collection('journalEntries');
+        collection.find({entryNumber: desiredEntryNumber}).toArray(function(err, entryDocs){
+          onQueryFinished(entryDocs);
+        });
+      }
+    });
+  },
 }
 
 module.exports = JournalQuery;
