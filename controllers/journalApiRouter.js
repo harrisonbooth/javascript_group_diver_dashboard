@@ -32,18 +32,14 @@ journalRouter.put('/:id', function(req, res){
   var desiredEntryNumber = parseInt(req.params.id);
   journalQuery.updateEntry(desiredEntryNumber, newContent, function(returnedEntries){
     res.json(returnedEntries);
-  }); 
+  });
 });
 
 journalRouter.delete('/:id', function(req, res){
   var desiredEntryNumber = parseInt(req.params.id);
   journalQuery.deleteEntry(desiredEntryNumber, function(returnedEntries){
     res.json(returnedEntries);
-  }) 
+  })
 })
-
-
-
-
 
 module.exports = journalRouter;
