@@ -1,8 +1,8 @@
 var JournalEntryList = require("../models/JournalEntryList");
 
 var UI = function(){
-  var entryList = new JournalEntryList();
-  entryList.listOfEntries(function(results){
+  this.entryList = new JournalEntryList();
+  this.entryList.listOfEntries(function(results){
     this.populateSelect(results);
   }.bind(this));
 };
@@ -18,6 +18,10 @@ UI.prototype = {
         select.appendChild(option);
       }
     });
+  },
+  selectEntry: function(){
+    var selectedEntryNumber = this.value;
+    
   }
 }
 

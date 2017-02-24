@@ -18,6 +18,17 @@ JournalEntryList.prototype = {
       
       callback(entryList);
     });
+  },
+
+  selectEntry: function(id, callback){
+    var url = "http://localhost:3000/api/journal/" + id;
+    this.makeRequest(url, function(){
+      if(this.status !== 200) return;
+      var jsonString = this.responseText;
+      var entry = JSON.parse(jsonString)[0];
+
+      callback(entry);
+    });
   }
 }
 

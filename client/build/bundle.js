@@ -73,8 +73,8 @@
 var JournalEntryList = __webpack_require__(2);
 
 var UI = function(){
-  var entryList = new JournalEntryList();
-  entryList.listOfEntries(function(results){
+  this.entryList = new JournalEntryList();
+  this.entryList.listOfEntries(function(results){
     this.populateSelect(results);
   }.bind(this));
 };
@@ -90,6 +90,10 @@ UI.prototype = {
         select.appendChild(option);
       }
     });
+  },
+  selectEntry: function(){
+    var selectedEntryNumber = this.value;
+    
   }
 }
 
@@ -103,7 +107,9 @@ module.exports = UI;
 var UI = __webpack_require__(0);
 
 var app = function(){
-  new UI();
+  var ui = new UI();
+  var select = document.getElementById('entry-select');
+  select.onchange = ui.selectEntry;
 };
 
 window.onload = app;
@@ -132,6 +138,17 @@ JournalEntryList.prototype = {
       var entryList = JSON.parse(jsonString);
       
       callback(entryList);
+    });
+  },
+
+  selectEntry: function(id, callback){
+    var url = "http://localhost:3000/api/journal/" + id;
+    this.makeRequest(url, function(){
+      if(this.status !== 200) return;
+      var jsonString = this.responseText;
+      var entry = JSON.parse(jsonString)[0];
+
+      callback(entry);
     });
   }
 }
