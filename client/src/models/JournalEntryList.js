@@ -1,13 +1,21 @@
-var JournalEntryList = function(){
+var JournalEntry = require('./journalEntry');
 
-}
+var JournalEntryList = function(){}
 
 JournalEntryList.prototype = {
-  makeRequest: function(url,callback){
+  makeRequest: function(url, callback){
     var request = new XMLHttpRequest();
     request.open('GET',url);
     request.onload = callback;
     request.send();
+  },
+
+  makePostRequest: function(url, payload, callback){
+    var request = new XMLHttpRequest();
+    request.open('POST', url);
+    requst.setRequestHeader('Content-Type', 'application/json');
+    request.onload = callback;
+    request.send(JSON.stringify(payload));
   },
 
   listOfEntries: function(callback){
@@ -15,7 +23,7 @@ JournalEntryList.prototype = {
       if(this.status !== 200) return;
       var jsonString = this.responseText;
       var entryList = JSON.parse(jsonString);
-      
+
       callback(entryList);
     });
   },
@@ -28,6 +36,15 @@ JournalEntryList.prototype = {
       var entry = JSON.parse(jsonString)[0];
 
       callback(entry);
+    });
+  },
+
+  newEntry: function(){
+    var newContentInput = document.getElementById('new-content-input');
+    var newContent = newContentInput.value;
+    var newEntry = new JournalEntry(newContent);
+    this.makePostRequest("http://localhost:3000/api/journal/", newEntry, function(){
+      
     });
   }
 }

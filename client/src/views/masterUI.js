@@ -19,11 +19,12 @@ UI.prototype = {
       }
     });
   },
+
   selectEntry: function(){
     var selectedEntryNumber = this.value;
     var oldElements = document.querySelectorAll('#journal-entry-container *');
     var entryContainer = document.getElementById('journal-entry-container');
-    
+
     oldElements.forEach(function(element){
       entryContainer.removeChild(element);
     });
@@ -36,6 +37,21 @@ UI.prototype = {
       entryContainer.appendChild(entryTimestampView);
       entryContainer.appendChild(entryContentView);
     });
+  },
+
+  newEntryForm: function(){
+    var entryList = new JournalEntryList();
+    var oldElements = document.querySelectorAll('#journal-entry-container *');
+    var entryContainer = document.getElementById('journal-entry-container');
+    oldElements.forEach(function(element){
+      entryContainer.removeChild(element);
+    });
+
+    var input = document.creatElement('input');
+    input.id = 'new-content-input';
+    var submitButton = document.createElement('button');
+
+    submitButton.onclick = entryList.newEntry;
   }
 }
 

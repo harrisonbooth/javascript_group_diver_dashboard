@@ -63,14 +63,14 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntryList = __webpack_require__(2);
+var JournalEntryList = __webpack_require__(1);
 
 var UI = function(){
   this.entryList = new JournalEntryList();
@@ -91,11 +91,12 @@ UI.prototype = {
       }
     });
   },
+
   selectEntry: function(){
     var selectedEntryNumber = this.value;
     var oldElements = document.querySelectorAll('#journal-entry-container *');
     var entryContainer = document.getElementById('journal-entry-container');
-    
+
     oldElements.forEach(function(element){
       entryContainer.removeChild(element);
     });
@@ -108,6 +109,21 @@ UI.prototype = {
       entryContainer.appendChild(entryTimestampView);
       entryContainer.appendChild(entryContentView);
     });
+  },
+
+  newEntryForm: function(){
+    var entryList = new JournalEntryList();
+    var oldElements = document.querySelectorAll('#journal-entry-container *');
+    var entryContainer = document.getElementById('journal-entry-container');
+    oldElements.forEach(function(element){
+      entryContainer.removeChild(element);
+    });
+
+    var input = document.creatElement('input');
+    input.id = 'new-content-input';
+    var submitButton = document.createElement('button');
+
+    submitButton.onclick = entryList.newEntry;
   }
 }
 
@@ -118,31 +134,24 @@ module.exports = UI;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var UI = __webpack_require__(0);
+var JournalEntry = __webpack_require__(3);
 
-var app = function(){
-  var ui = new UI();
-  var select = document.getElementById('entry-select');
-  select.onchange = ui.selectEntry;
-};
-
-window.onload = app;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-var JournalEntryList = function(){
-
-}
+var JournalEntryList = function(){}
 
 JournalEntryList.prototype = {
-  makeRequest: function(url,callback){
+  makeRequest: function(url, callback){
     var request = new XMLHttpRequest();
     request.open('GET',url);
     request.onload = callback;
     request.send();
+  },
+
+  makePostRequest: function(url, payload, callback){
+    var request = new XMLHttpRequest();
+    request.open('POST', url);
+    requst.setRequestHeader('Content-Type', 'application/json');
+    request.onload = callback;
+    request.send(JSON.stringify(payload));
   },
 
   listOfEntries: function(callback){
@@ -150,7 +159,7 @@ JournalEntryList.prototype = {
       if(this.status !== 200) return;
       var jsonString = this.responseText;
       var entryList = JSON.parse(jsonString);
-      
+
       callback(entryList);
     });
   },
@@ -164,10 +173,54 @@ JournalEntryList.prototype = {
 
       callback(entry);
     });
+  },
+
+  newEntry: function(){
+    var newContentInput = document.getElementById('new-content-input');
+    var newContent = newContentInput.value;
+    var newEntry = new JournalEntry(newContent);
+    this.makePostRequest("http://localhost:3000/api/journal/", newEntry, function(){
+      
+    });
   }
 }
 
 module.exports = JournalEntryList;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var UI = __webpack_require__(0);
+
+var app = function(){
+  var ui = new UI();
+  var select = document.getElementById('entry-select');
+  select.onchange = ui.selectEntry;
+
+  var button = document.getElementById('add-new-entry');
+
+  button.onclick = ui.newEntryForm;
+};
+
+window.onload = app;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+var JournalEntry = function(content){
+
+  this.content = content;
+  this.timestamp = Date().substring(0, 24);
+}
+
+
+
+module.exports = JournalEntry;
+
 
 /***/ })
 /******/ ]);
