@@ -1,11 +1,13 @@
 var JournalEntryList = require("../models/JournalEntryList");
 var JournalEntry = require("../models/journalEntry");
+var MapWrapper = require("../models/mapWrapper");
 
 var UI = function(){
   this.entryList = new JournalEntryList();
   this.entryList.listOfEntries(function(results){
     this.populateSelect(results);
   }.bind(this));
+  this.showMap();
 };
 
 UI.prototype = {
@@ -103,8 +105,14 @@ UI.prototype = {
     entryContainer.appendChild(input);
     entryContainer.appendChild(submitButton);
     submitButton.onclick = this.handleSubmitButtonClick.bind(this);
-  }
+  },
 
+  showMap: function(){
+    var container = document.getElementById('google-map-container');
+    var center = {lat: 51.5, lng: -0.129};
+    var zoom = 10;
+    var mainMap = new MapWrapper(center, zoom, container);
+  }
 
 }
 

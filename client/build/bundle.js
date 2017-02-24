@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -86,12 +86,14 @@ module.exports = JournalEntry;
 
 var JournalEntryList = __webpack_require__(2);
 var JournalEntry = __webpack_require__(0);
+var MapWrapper = __webpack_require__(3);
 
 var UI = function(){
   this.entryList = new JournalEntryList();
   this.entryList.listOfEntries(function(results){
     this.populateSelect(results);
   }.bind(this));
+  this.showMap();
 };
 
 UI.prototype = {
@@ -189,8 +191,14 @@ UI.prototype = {
     entryContainer.appendChild(input);
     entryContainer.appendChild(submitButton);
     submitButton.onclick = this.handleSubmitButtonClick.bind(this);
-  }
+  },
 
+  showMap: function(){
+    var container = document.getElementById('google-map-container');
+    var center = {lat: 51.5, lng: -0.129};
+    var zoom = 10;
+    var mainMap = new MapWrapper(center, zoom, container);
+  }
 
 }
 
@@ -281,6 +289,21 @@ module.exports = JournalEntryList;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+var MapWrapper = function(coords, zoom, container){
+  this.googleMap = new google.maps.Map(container, {
+    center: coords,
+    zoom: zoom
+  });
+};
+
+
+module.exports = MapWrapper;
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var UI = __webpack_require__(1);
