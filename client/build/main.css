@@ -2,3 +2,7 @@
   width: 500px;
   height: 500px;
 }
+
+#user-location-button{
+  z-index: 9999;
+}

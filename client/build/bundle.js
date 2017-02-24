@@ -198,6 +198,14 @@ UI.prototype = {
     var center = {lat: 51.5, lng: -0.129};
     var zoom = 10;
     var mainMap = new MapWrapper(center, zoom, container);
+
+    var mapControls = document.getElementById('map-controller');
+    var returnGeoLocation = document.createElement('button');
+    returnGeoLocation.innerText = 'My Location';
+    returnGeoLocation.id = 'user-location-button';
+    mapControls.appendChild(returnGeoLocation);
+    console.log(mainMap);
+    returnGeoLocation.onclick = mainMap.getUserLocation.bind(mainMap);
   }
 
 }
