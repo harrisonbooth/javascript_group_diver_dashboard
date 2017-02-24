@@ -63,15 +63,29 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+var JournalEntry = function(content){
+  this.content = content;
+  this.timestamp = Date().substring(0, 24);
+}
+
+
+
+module.exports = JournalEntry;
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntryList = __webpack_require__(1);
-var JournalEntry = __webpack_require__(3);
+var JournalEntryList = __webpack_require__(2);
+var JournalEntry = __webpack_require__(0);
 
 var UI = function(){
   this.entryList = new JournalEntryList();
@@ -99,35 +113,60 @@ UI.prototype = {
     });
   },
 
-  selectEntry: function(){
-    var selectedEntryNumber = this.value;
+  handleDeleteButtonClick: function(){
+    var entryList = new JournalEntryList();
+    var select = document.getElementById('entry-select');
+    var entryToDelete = select.value;
+
+    entryList.deleteEntry(entryToDelete, function(results){
+      this.populateSelect(results);
+    }.bind(this));
+
     var oldElements = document.querySelectorAll('#journal-entry-container *');
     var entryContainer = document.getElementById('journal-entry-container');
 
     oldElements.forEach(function(element){
       entryContainer.removeChild(element);
     });
+  },
+
+  selectEntry: function(){
+    var select = document.getElementById('entry-select');
+    var selectedEntryNumber = select.value;
+    var oldElements = document.querySelectorAll('#journal-entry-container *');
+    var entryContainer = document.getElementById('journal-entry-container');
+
+    oldElements.forEach(function(element){
+      entryContainer.removeChild(element);
+    });
+
+    var deleteButton = document.createElement('button');
+    deleteButton.id = 'delete-button';
+    deleteButton.innerText = 'Delete Entry';
     var entryContentView = document.createElement('p');
     var entryTimestampView = document.createElement('h1');
     var entryList = new JournalEntryList();
+
     entryList.selectEntry(selectedEntryNumber, function(entry) {
       entryTimestampView.innerText = entry.timestamp;
       entryContentView.innerText = entry.content;
       entryContainer.appendChild(entryTimestampView);
       entryContainer.appendChild(entryContentView);
+      entryContainer.appendChild(deleteButton);
     });
+    deleteButton.onclick = this.handleDeleteButtonClick.bind(this);
   },
 
   handleSubmitButtonClick: function(){
-    console.log('submit button clicked');
     var entryList = new JournalEntryList();
     var newContentInput = document.getElementById('new-content-input');
     var newContent = newContentInput.value;
     var newEntry = new JournalEntry(newContent);
+
     entryList.newEntry(newEntry, function(results){
       this.populateSelect(results);
     }.bind(this));
-    
+
     var oldElements = document.querySelectorAll('#journal-entry-container *');
     var entryContainer = document.getElementById('journal-entry-container');
     oldElements.forEach(function(element){
@@ -152,16 +191,17 @@ UI.prototype = {
     submitButton.onclick = this.handleSubmitButtonClick.bind(this);
   }
 
+
 }
 
 module.exports = UI;
 
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntry = __webpack_require__(3);
+var JournalEntry = __webpack_require__(0);
 
 var JournalEntryList = function(){}
 
@@ -179,6 +219,13 @@ JournalEntryList.prototype = {
     request.setRequestHeader('Content-Type', 'application/json');
     request.onload = callback;
     request.send(JSON.stringify(payload));
+  },
+
+  makeDeleteRequest: function(url, callback){
+    var request = new XMLHttpRequest();
+    request.open('DELETE', url);
+    request.onload = callback;
+    request.send();
   },
 
   listOfEntries: function(callback){
@@ -212,6 +259,19 @@ JournalEntryList.prototype = {
         callback(entries);
       })
     }.bind(this));
+  },
+
+  deleteEntry: function(id, callback){
+    var url = "http://localhost:3000/api/journal/" + id;
+    this.makeDeleteRequest(url, function(){
+      this.makeRequest("http://localhost:3000/api/journal/", function(){
+        if(this.status !== 200) return;
+        var jsonString = this.responseText;
+        var entries = JSON.parse(jsonString);
+
+        callback(entries);
+      })
+    }.bind(this));
   }
 
 }
@@ -220,37 +280,21 @@ module.exports = JournalEntryList;
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var UI = __webpack_require__(0);
+var UI = __webpack_require__(1);
 
 var app = function(){
   var ui = new UI();
   var select = document.getElementById('entry-select');
-  select.onchange = ui.selectEntry;
+  select.onchange = ui.selectEntry.bind(ui);
 
   var button = document.getElementById('add-new-entry');
-
   button.onclick = ui.newEntryForm.bind(ui);
 };
 
 window.onload = app;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-var JournalEntry = function(content){
-
-  this.content = content;
-  this.timestamp = Date().substring(0, 24);
-}
-
-
-
-module.exports = JournalEntry;
 
 
 /***/ })
