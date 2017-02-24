@@ -1,4 +1,5 @@
 var JournalEntryList = require("../models/JournalEntryList");
+var JournalEntry = require("../models/journalEntry");
 
 var UI = function(){
   this.entryList = new JournalEntryList();
@@ -10,6 +11,12 @@ var UI = function(){
 UI.prototype = {
   populateSelect: function(results){
     var select = document.getElementById('entry-select');
+    var oldElements = document.querySelectorAll('#entry-select *');
+
+    oldElements.forEach(function(element){
+      select.removeChild(element);
+    });
+
     results.forEach(function(entry){
       var option = document.createElement('option');
       if (entry.timestamp !== undefined){
@@ -39,20 +46,40 @@ UI.prototype = {
     });
   },
 
-  newEntryForm: function(){
+  handleSubmitButtonClick: function(){
+    console.log('submit button clicked');
     var entryList = new JournalEntryList();
+    var newContentInput = document.getElementById('new-content-input');
+    var newContent = newContentInput.value;
+    var newEntry = new JournalEntry(newContent);
+    entryList.newEntry(newEntry, function(results){
+      this.populateSelect(results);
+    }.bind(this));
+    
+    var oldElements = document.querySelectorAll('#journal-entry-container *');
+    var entryContainer = document.getElementById('journal-entry-container');
+    oldElements.forEach(function(element){
+      entryContainer.removeChild(element);
+    });
+  },
+
+  newEntryForm: function(){
     var oldElements = document.querySelectorAll('#journal-entry-container *');
     var entryContainer = document.getElementById('journal-entry-container');
     oldElements.forEach(function(element){
       entryContainer.removeChild(element);
     });
 
-    var input = document.creatElement('input');
+    var input = document.createElement('input');
     input.id = 'new-content-input';
     var submitButton = document.createElement('button');
-
-    submitButton.onclick = entryList.newEntry;
+    submitButton.id = 'submit-button';
+    submitButton.innerText = 'Submit';
+    entryContainer.appendChild(input);
+    entryContainer.appendChild(submitButton);
+    submitButton.onclick = this.handleSubmitButtonClick.bind(this);
   }
+
 }
 
 module.exports = UI;

@@ -7,7 +7,7 @@ var app = function(){
 
   var button = document.getElementById('add-new-entry');
 
-  button.onclick = ui.newEntryForm;
+  button.onclick = ui.newEntryForm.bind(ui);
 };
 
 window.onload = app;

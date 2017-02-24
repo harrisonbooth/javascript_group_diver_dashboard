@@ -13,7 +13,7 @@ JournalEntryList.prototype = {
   makePostRequest: function(url, payload, callback){
     var request = new XMLHttpRequest();
     request.open('POST', url);
-    requst.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Content-Type', 'application/json');
     request.onload = callback;
     request.send(JSON.stringify(payload));
   },
@@ -39,14 +39,18 @@ JournalEntryList.prototype = {
     });
   },
 
-  newEntry: function(){
-    var newContentInput = document.getElementById('new-content-input');
-    var newContent = newContentInput.value;
-    var newEntry = new JournalEntry(newContent);
+  newEntry: function(newEntry, callback){
     this.makePostRequest("http://localhost:3000/api/journal/", newEntry, function(){
-      
-    });
+      this.makeRequest("http://localhost:3000/api/journal/", function(){
+        if(this.status !== 200) return;
+        var jsonString = this.responseText;
+        var entries = JSON.parse(jsonString);
+
+        callback(entries);
+      })
+    }.bind(this));
   }
+
 }
 
 module.exports = JournalEntryList;

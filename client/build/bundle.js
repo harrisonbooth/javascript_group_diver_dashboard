@@ -71,6 +71,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var JournalEntryList = __webpack_require__(1);
+var JournalEntry = __webpack_require__(3);
 
 var UI = function(){
   this.entryList = new JournalEntryList();
@@ -82,6 +83,12 @@ var UI = function(){
 UI.prototype = {
   populateSelect: function(results){
     var select = document.getElementById('entry-select');
+    var oldElements = document.querySelectorAll('#entry-select *');
+
+    oldElements.forEach(function(element){
+      select.removeChild(element);
+    });
+
     results.forEach(function(entry){
       var option = document.createElement('option');
       if (entry.timestamp !== undefined){
@@ -111,20 +118,40 @@ UI.prototype = {
     });
   },
 
-  newEntryForm: function(){
+  handleSubmitButtonClick: function(){
+    console.log('submit button clicked');
     var entryList = new JournalEntryList();
+    var newContentInput = document.getElementById('new-content-input');
+    var newContent = newContentInput.value;
+    var newEntry = new JournalEntry(newContent);
+    entryList.newEntry(newEntry, function(results){
+      this.populateSelect(results);
+    }.bind(this));
+    
+    var oldElements = document.querySelectorAll('#journal-entry-container *');
+    var entryContainer = document.getElementById('journal-entry-container');
+    oldElements.forEach(function(element){
+      entryContainer.removeChild(element);
+    });
+  },
+
+  newEntryForm: function(){
     var oldElements = document.querySelectorAll('#journal-entry-container *');
     var entryContainer = document.getElementById('journal-entry-container');
     oldElements.forEach(function(element){
       entryContainer.removeChild(element);
     });
 
-    var input = document.creatElement('input');
+    var input = document.createElement('input');
     input.id = 'new-content-input';
     var submitButton = document.createElement('button');
-
-    submitButton.onclick = entryList.newEntry;
+    submitButton.id = 'submit-button';
+    submitButton.innerText = 'Submit';
+    entryContainer.appendChild(input);
+    entryContainer.appendChild(submitButton);
+    submitButton.onclick = this.handleSubmitButtonClick.bind(this);
   }
+
 }
 
 module.exports = UI;
@@ -149,7 +176,7 @@ JournalEntryList.prototype = {
   makePostRequest: function(url, payload, callback){
     var request = new XMLHttpRequest();
     request.open('POST', url);
-    requst.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Content-Type', 'application/json');
     request.onload = callback;
     request.send(JSON.stringify(payload));
   },
@@ -175,14 +202,18 @@ JournalEntryList.prototype = {
     });
   },
 
-  newEntry: function(){
-    var newContentInput = document.getElementById('new-content-input');
-    var newContent = newContentInput.value;
-    var newEntry = new JournalEntry(newContent);
+  newEntry: function(newEntry, callback){
     this.makePostRequest("http://localhost:3000/api/journal/", newEntry, function(){
-      
-    });
+      this.makeRequest("http://localhost:3000/api/journal/", function(){
+        if(this.status !== 200) return;
+        var jsonString = this.responseText;
+        var entries = JSON.parse(jsonString);
+
+        callback(entries);
+      })
+    }.bind(this));
   }
+
 }
 
 module.exports = JournalEntryList;
@@ -201,7 +232,7 @@ var app = function(){
 
   var button = document.getElementById('add-new-entry');
 
-  button.onclick = ui.newEntryForm;
+  button.onclick = ui.newEntryForm.bind(ui);
 };
 
 window.onload = app;
