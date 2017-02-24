@@ -93,7 +93,12 @@ UI.prototype = {
   },
   selectEntry: function(){
     var selectedEntryNumber = this.value;
+    var oldElements = document.querySelectorAll('#journal-entry-container *');
     var entryContainer = document.getElementById('journal-entry-container');
+    
+    oldElements.forEach(function(element){
+      entryContainer.removeChild(element);
+    });
     var entryContentView = document.createElement('p');
     var entryTimestampView = document.createElement('h1');
     var entryList = new JournalEntryList();

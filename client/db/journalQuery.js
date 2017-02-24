@@ -32,15 +32,17 @@ JournalQuery.prototype = {
       if(db){
         var collection = db.collection('journalEntries');
         collection.find({entryNumber: "entry number counter"}).toArray(function(err, entryNumberCounterArray){
+          var newEntryNumber = entryNumberCounterArray[0].currentEntryNumber + 1;
+          
           collection.update(entryNumberCounterArray[0], {entryNumber: "entry number counter", currentEntryNumber: newEntryNumber});
 
-          var newEntryNumber = entryNumberCounterArray[0].currentEntryNumber + 1;
           entryToAdd.entryNumber = newEntryNumber;
 
           collection.insert(entryToAdd);
           collection.find().toArray(function(err, entryDocs){
             onQueryFinished(entryDocs);
           });
+          console.log(entryNumberCounterArray[0]);
         }.bind(this));
       }
     });
