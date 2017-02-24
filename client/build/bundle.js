@@ -68,16 +68,28 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+var JournalEntryList = __webpack_require__(2);
 
 var UI = function(){
-
-
+  var entryList = new JournalEntryList();
+  entryList.listOfEntries(function(results){
+    this.populateSelect(results);
+  }.bind(this));
 };
 
 UI.prototype = {
-  render: function(){
-
+  populateSelect: function(results){
+    var select = document.getElementById('entry-select');
+    results.forEach(function(entry){
+      var option = document.createElement('option');
+      if (entry.timestamp !== undefined){
+        option.innerText = ("[" + entry.entryNumber + "] " + entry.timestamp);
+        option.value = entry.entryNumber;
+        select.appendChild(option);
+      }
+    });
   }
 }
 
@@ -96,6 +108,35 @@ var app = function(){
 
 window.onload = app;
 
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var JournalEntryList = function(){
+
+}
+
+JournalEntryList.prototype = {
+  makeRequest: function(url,callback){
+    var request = new XMLHttpRequest();
+    request.open('GET',url);
+    request.onload = callback;
+    request.send();
+  },
+
+  listOfEntries: function(callback){
+    this.makeRequest("http://localhost:3000/api/journal", function(){
+      if(this.status !== 200) return;
+      var jsonString = this.responseText;
+      var entryList = JSON.parse(jsonString);
+      
+      callback(entryList);
+    });
+  }
+}
+
+module.exports = JournalEntryList;
 
 /***/ })
 /******/ ]);
