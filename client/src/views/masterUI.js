@@ -21,7 +21,16 @@ UI.prototype = {
   },
   selectEntry: function(){
     var selectedEntryNumber = this.value;
-    
+    var entryContainer = document.getElementById('journal-entry-container');
+    var entryContentView = document.createElement('p');
+    var entryTimestampView = document.createElement('h1');
+    var entryList = new JournalEntryList();
+    entryList.selectEntry(selectedEntryNumber, function(entry) {
+      entryTimestampView.innerText = entry.timestamp;
+      entryContentView.innerText = entry.content;
+      entryContainer.appendChild(entryTimestampView);
+      entryContainer.appendChild(entryContentView);
+    });
   }
 }
 
