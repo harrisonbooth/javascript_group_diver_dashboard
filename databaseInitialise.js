@@ -20,3 +20,32 @@ db.journalEntries.insert(
     }
   ]
 );
+
+use mission;
+db.dropDatabase();
+
+use mission;
+db.missionUpdates.insert(
+  [
+    {
+      from: "Family",
+      message: "We sent you a care package of your favourite shows... just 2 weeks to go!",
+      attachment: true
+    },
+    {
+      from: "Marine Conservation Society, The",
+      message: "Here are the latest figures on the impact of trawling on various fish species you asked for.",
+      attachment: true
+    },
+    {
+      from: "Partner",
+      message: "Hey! Had sushi tonight and thought of you... Because it's our favourite, not because you're under the sea!",
+      attachment: false
+    },
+    {
+      from: "University of California, Berkeley",
+      message: "Can't wait for your figures, its really going to enhance the courses for next year.",
+      attachment: false
+    }
+  ]
+);
