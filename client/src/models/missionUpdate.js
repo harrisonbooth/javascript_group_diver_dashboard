@@ -1,4 +1,4 @@
-var MissionUpdate = function(){}
+var MissionUpdate = function(){};
 
 MissionUpdate.prototype = {
   makeRequest: function(url, callback){
@@ -17,6 +17,7 @@ MissionUpdate.prototype = {
       callback(missionList);
     }
   }
+  
 }
 
 module.exports = MissionUpdate;

@@ -142,15 +142,14 @@ UI.prototype = {
 
     results.forEach(function(update){
       var p = document.createElement('p');
-      if(update.attachment === true){
-        var img = document.createElement('img');
-        img.src = "http://www.emoji.co.uk/files/microsoft-emojis/objects-windows10/9866-paperclip.png";
-      }
-      p.innerText = "From: " + update.from + "\n" + update.message + " " + img;
+      // if(update.attachment === true){
+      //   var img = document.createElement('img');
+      //   img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
+      // }
+      p.innerText = "From: " + update.from + "\n" + update.message;
     })
     container.appendChild(p);
-  };
-
+  }
 };
 
 module.exports = UI;
