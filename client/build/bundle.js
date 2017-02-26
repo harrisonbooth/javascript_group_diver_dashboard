@@ -228,7 +228,15 @@ UI.prototype = {
 
   playSonarSound: function(){
     var sonarAudio = new Audio('sonar-sound.mp3');
-    sonarAudio.play();
+    var sonarButton = document.getElementById('sonar-button');
+
+    if(sonarButton.innerText === "Sonar"){
+      sonarAudio.play();
+      sonarButton.innerText = "Stop Sonar";
+    } else {
+      sonarAudio.pause();
+      sonarButton.innerText = "Sonar";
+    }
   }
 };
 
