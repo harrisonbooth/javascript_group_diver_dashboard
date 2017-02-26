@@ -118,7 +118,6 @@ UI.prototype = {
     returnGeoLocation.innerText = 'My Location';
     returnGeoLocation.id = 'user-location-button';
     mapControls.appendChild(returnGeoLocation);
-    console.log(mainMap);
     returnGeoLocation.onclick = mainMap.getUserLocation.bind(mainMap);
   }
 
