@@ -1,4 +1,4 @@
-var JournalEntry = require('./journalEntry');
+var JournalEntry = require('./journalEntry'); 
 
 var JournalEntryList = function(){}
 
