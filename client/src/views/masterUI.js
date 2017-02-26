@@ -11,7 +11,7 @@ var UI = function(){
   }.bind(this));
 
   this.missionUpdate = new MissionUpdate();
-  this.missionUpdate.listOfMissions(function(results){
+  this.missionUpdate.listofMissions(function(results){
     this.populateMissionDiv(results);
   }.bind(this));
 
@@ -142,14 +142,15 @@ UI.prototype = {
 
     results.forEach(function(update){
       var p = document.createElement('p');
-      // if(update.attachment === true){
-      //   var img = document.createElement('img');
-      //   img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
-      // }
+      if(update.attachment === true){
+        var img = document.createElement('img');
+        img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
+      }
       p.innerText = "From: " + update.from + "\n" + update.message;
+      container.appendChild(p);
     })
-    container.appendChild(p);
   }
+
 };
 
 module.exports = UI;
