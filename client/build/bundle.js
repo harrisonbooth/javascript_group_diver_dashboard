@@ -214,11 +214,13 @@ UI.prototype = {
 
     results.forEach(function(update){
       var p = document.createElement('p');
+      p.innerText = "From: " + update.from + "\n" + update.message + "   ";
       if(update.attachment === true){
         var img = document.createElement('img');
+        img.id = "paperclip-icon";
         img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
+        p.appendChild(img);
       }
-      p.innerText = "From: " + update.from + "\n" + update.message;
       container.appendChild(p);
     })
   }
