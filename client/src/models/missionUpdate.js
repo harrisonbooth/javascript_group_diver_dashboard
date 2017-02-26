@@ -18,3 +18,5 @@ MissionUpdate.prototype = {
     }
   }
 }
+
+module.exports = MissionUpdate;

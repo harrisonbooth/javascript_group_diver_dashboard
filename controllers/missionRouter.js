@@ -10,4 +10,4 @@ missionRouter.get('/', function(req, res){
   });
 });
 
-modeule.exports = missionRouter;
+module.exports = missionRouter;

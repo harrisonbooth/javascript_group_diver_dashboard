@@ -14,7 +14,7 @@ MissionQuery.prototype = {
         });
       }
     });
-  };
+  }
 
 };
 
