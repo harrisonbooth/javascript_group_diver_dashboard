@@ -17,3 +17,5 @@ MissionQuery.prototype = {
   };
 
 };
+
+module.exports = MissionQuery;
