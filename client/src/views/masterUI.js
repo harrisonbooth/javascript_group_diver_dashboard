@@ -1,4 +1,5 @@
 var JournalEntryList = require("../models/JournalEntryList");
+var MissionUpdate = require("../models/missionUpdate");
 var JournalEntry = require("../models/journalEntry");
 var MapWrapper = require("../models/mapWrapper");
 var NewsUI = require("./newsUI");
@@ -7,6 +8,11 @@ var UI = function(){
   this.entryList = new JournalEntryList();
   this.entryList.listOfEntries(function(results){
     this.populateSelect(results);
+  }.bind(this));
+
+  this.missionUpdate = new MissionUpdate();
+  this.missionUpdate.listOfMissions(function(results){
+    this.populateMissionDiv(results);
   }.bind(this));
 
   var newsUI = new NewsUI();
@@ -129,8 +135,22 @@ UI.prototype = {
     returnGeoLocation.id = 'user-location-button';
     mapControls.appendChild(returnGeoLocation);
     returnGeoLocation.onclick = mainMap.getUserLocation.bind(mainMap);
-  }
+  },
 
-}
+  populateMissionDiv: function(results){
+    var container = document.getElementById('mission-updates-container');
+
+    results.forEach(function(update){
+      var p = document.createElement('p');
+      if(update.attachment === true){
+        var img = document.createElement('img');
+        img.src = "http://www.emoji.co.uk/files/microsoft-emojis/objects-windows10/9866-paperclip.png";
+      }
+      p.innerText = "From: " + update.from + "\n" + update.message + " " + img;
+    })
+    container.appendChild(p);
+  };
+
+};
 
 module.exports = UI;
