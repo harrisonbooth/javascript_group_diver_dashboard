@@ -9,7 +9,7 @@ var app = function(){
   button.onclick = ui.newEntryForm.bind(ui);
 
   var sonarButton = document.getElementById('sonar-button');
-  sonarButton.onclick = ui.playSonarSound;
+  sonarButton.onclick = ui.playSonarSound.bind(this);
 };
 
 window.onload = app;

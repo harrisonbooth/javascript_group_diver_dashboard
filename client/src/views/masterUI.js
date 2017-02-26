@@ -155,10 +155,8 @@ UI.prototype = {
   },
 
   playSonarSound: function(){
-    var audio = document.createElement('audio');
-    audio.type = 'audio/mp3';
     var sonarAudio = new Audio('sonar-sound.mp3');
-    audio.play(sonarAudio);
+    sonarAudio.play();
   }
 };
 
