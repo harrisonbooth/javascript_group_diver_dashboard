@@ -105,6 +105,12 @@ UI.prototype = {
       select.removeChild(element);
     });
 
+    var defaultOption = document.createElement('option');
+    defaultOption.selected = 'true';
+    defaultOption.disabled = 'false';
+    defaultOption.innerText = "Please select an entry";
+    select.appendChild(defaultOption);
+
     results.forEach(function(entry){
       var option = document.createElement('option');
       if (entry.timestamp !== undefined){
