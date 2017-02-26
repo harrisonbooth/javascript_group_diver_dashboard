@@ -63,32 +63,18 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
-
-var JournalEntry = function(content){
-  this.content = content;
-  this.timestamp = Date().substring(0, 24);
-}
-
-
-
-module.exports = JournalEntry;
-
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntryList = __webpack_require__(2);
-var MissionUpdate = __webpack_require__(4);
-var JournalEntry = __webpack_require__(0);
-var MapWrapper = __webpack_require__(3);
-var NewsUI = __webpack_require__(6);
+var JournalEntryList = __webpack_require__(3);
+var MissionUpdate = __webpack_require__(5);
+var JournalEntry = __webpack_require__(2);
+var MapWrapper = __webpack_require__(4);
+var NewsUI = __webpack_require__(7);
 
 var UI = function(){
   this.entryList = new JournalEntryList();
@@ -245,10 +231,42 @@ module.exports = UI;
 
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntry = __webpack_require__(0); 
+var UI = __webpack_require__(0);
+
+var app = function(){
+  var ui = new UI();
+  var select = document.getElementById('entry-select');
+  select.onchange = ui.selectEntry.bind(ui);
+
+  var button = document.getElementById('add-new-entry');
+  button.onclick = ui.newEntryForm.bind(ui);
+};
+
+window.onload = app;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var JournalEntry = function(content){
+  this.content = content;
+  this.timestamp = Date().substring(0, 24);
+}
+
+
+
+module.exports = JournalEntry;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var JournalEntry = __webpack_require__(2); 
 
 var JournalEntryList = function(){}
 
@@ -327,7 +345,7 @@ module.exports = JournalEntryList;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var MapWrapper = function(coords, zoom, container){
@@ -366,7 +384,7 @@ module.exports = MapWrapper;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 var MissionUpdate = function(){};
@@ -395,7 +413,7 @@ module.exports = MissionUpdate;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 var NewsStory = function(){}
@@ -429,10 +447,10 @@ NewsStory.prototype = {
 module.exports = NewsStory;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var NewsStory = __webpack_require__(5);
+var NewsStory = __webpack_require__(6);
 
 var NewsUI = function(){
   this.newsStory = new NewsStory();
@@ -509,24 +527,6 @@ NewsUI.prototype = {
 }
 
 module.exports = NewsUI;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var UI = __webpack_require__(1);
-
-var app = function(){
-  var ui = new UI();
-  var select = document.getElementById('entry-select');
-  select.onchange = ui.selectEntry.bind(ui);
-
-  var button = document.getElementById('add-new-entry');
-  button.onclick = ui.newEntryForm.bind(ui);
-};
-
-window.onload = app;
 
 
 /***/ })
