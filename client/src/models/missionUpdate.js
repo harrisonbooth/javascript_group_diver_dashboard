@@ -15,9 +15,9 @@ MissionUpdate.prototype = {
       var missionList = JSON.parse(jsonString);
 
       callback(missionList);
-    }
+    })
   }
-  
+
 }
 
 module.exports = MissionUpdate;
