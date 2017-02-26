@@ -224,6 +224,13 @@ UI.prototype = {
       }
       container.appendChild(p);
     })
+  },
+
+  playSonarSound: function(){
+    var audio = document.createElement('audio');
+    audio.type = 'audio/mp3';
+    var sonarAudio = new Audio('sonar-sound.mp3');
+    audio.play(sonarAudio);
   }
 };
 
@@ -243,6 +250,9 @@ var app = function(){
 
   var button = document.getElementById('add-new-entry');
   button.onclick = ui.newEntryForm.bind(ui);
+
+  var sonarButton = document.getElementById('sonar-button');
+  sonarButton.onclick = ui.playSonarSound;
 };
 
 window.onload = app;
