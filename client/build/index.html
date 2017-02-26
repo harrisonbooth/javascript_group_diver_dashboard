@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Deep Sea Diver Dashboard (name tbc)</title>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="bundle.js"></script>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
-  </head>
-  <body>
-    <div id="journal-container">
-    <select id="entry-select">
-
-    </select>
-    <button id="add-new-entry">Add Entry</button>
-      <div id="journal-entry-container" >
+<head>
+  <title>Deep Sea Diver Dashboard (name tbc)</title>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="bundle.js"></script>
+  <link rel="stylesheet" type="text/css" href="main.css"/>
+</head>
+<body>
+  <div id="top-row">
+    <div id= "ultra-news-story-container">
+      <div id="news-story-container">
 
       </div>
+      <div id= "navLinks">
+        <ul>
+          <li class="itemLinks" data-pos="0px"></li>
+          <li class="itemLinks" data-pos="-220px"></li>
+          <li class="itemLinks" data-pos="-440px"></li>
+          <li class="itemLinks" data-pos="-660px"></li>
+          <li class="itemLinks" data-pos="-880px"></li>
+          <li class="itemLinks" data-pos="-1100px"></li>
+          <li class="itemLinks" data-pos="-1320px"></li>
+          <li class="itemLinks" data-pos="-1540px"></li>
+          <li class="itemLinks" data-pos="-1760px"></li>
+          <li class="itemLinks" data-pos="-1980px"></li>
+        </ul>
+      </div>
     </div>
-
+  <div id="map-wrapper">
     <div id="google-map-container">
 
     </div>
     <div id="map-controller">
 
     </div>
-    <div id= "ultra-news-story-container">
-      <div id="news-story-container">
+  </div>
+</div>
+<div id="journal-container">
+  <select id="entry-select">
 
-     </div>
-    </div>
-    <div id= "navLinks">
-      <ul>
-             <li class="itemLinks" data-pos="0px"></li>
-             <li class="itemLinks" data-pos="-220px"></li>
-             <li class="itemLinks" data-pos="-440px"></li>
-             <li class="itemLinks" data-pos="-660px"></li>
-             <li class="itemLinks" data-pos="-880px"></li>
-             <li class="itemLinks" data-pos="-1100px"></li>
-             <li class="itemLinks" data-pos="-1320px"></li>
-             <li class="itemLinks" data-pos="-1540px"></li>
-             <li class="itemLinks" data-pos="-1760px"></li>
-             <li class="itemLinks" data-pos="-1980px"></li>
-         </ul>
-    </div>
-    <div id="mission-updates-container">
+  </select>
+  <button id="add-new-entry">Add Entry</button>
+  <div id="journal-entry-container" >
 
-    </div>
-  </body>
+  </div>
+</div>
+  <div id="mission-updates-container">
+
+  </div>
+</body>
 </html>

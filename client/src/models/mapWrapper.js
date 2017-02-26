@@ -14,9 +14,18 @@ MapWrapper.prototype = {
         var lng = position.coords.longitude;
         var coords = new google.maps.LatLng(lat, lng);
         this.googleMap.setCenter(coords);
+        this.addMarker(coords);
       }.bind(this))
     }
-  }
+  },
+
+  addMarker: function(coords){
+   var marker = new google.maps.Marker({
+     position: coords,
+     map: this.googleMap,
+     icon: "http://i.imgur.com/sUxB3aV.png"
+   });
+ },
 
 }
 
