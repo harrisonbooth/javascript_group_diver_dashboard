@@ -142,7 +142,8 @@ UI.prototype = {
 
     results.forEach(function(update){
       var p = document.createElement('p');
-      p.innerText = "From: " + update.from + "\n" + update.message + "   ";
+      var trimmedContent = update.message.substring(0, 70);
+      p.innerText = "From: " + update.from + "\n" + trimmedContent + "...  ";
       if(update.attachment === true){
         var img = document.createElement('img');
         img.id = "paperclip-icon";
@@ -152,7 +153,6 @@ UI.prototype = {
       container.appendChild(p);
     })
   }
-
 };
 
 module.exports = UI;
