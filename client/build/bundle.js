@@ -102,7 +102,7 @@ var UI = function(){
     this.populateMissionDiv(results);
   }.bind(this));
 
-  var newsUI = new NewsUI();
+  this.newsUI = new NewsUI();
 
   this.showMap();
 
@@ -534,13 +534,17 @@ var NewsUI = function(){
   this.newsStory.newsStoryResponse(function(newsArray){
     this.showNewsStory(newsArray);
   }.bind(this));
+
+  localStorage.setItem("currentNewsLink", 0);
 }
 
 NewsUI.prototype = {
   showNewsStory: function(newsArray){
     var ultraContainer = document.getElementById('ultra-news-story-container');
     var container = document.getElementById('news-story-container');
+    this.container = container;
     var links = document.getElementsByClassName('itemLinks');
+    this.links = links;
     var counter = 0;
     var activeLink = 0;
 
@@ -558,9 +562,8 @@ NewsUI.prototype = {
 
       var clickedLink = event.target;
       activeLink = clickedLink.itemID;
-      // console.log(activeLink);
 
-      localStorage.setItem("currentNewsLink", );
+      localStorage.setItem("currentNewsLink", activeLink);
       changePosition(clickedLink);
     }
 
@@ -605,6 +608,28 @@ NewsUI.prototype = {
   },
 
   scrollNews: function(){
+    var currentLinkIndex = parseInt(localStorage.getItem("currentNewsLink"));
+
+    if(currentLinkIndex >= 9){
+      currentLinkIndex = 0;
+    } else {
+      currentLinkIndex += 1;
+    }
+
+    var link = this.links[currentLinkIndex];
+    var container = this.container;
+    var position = link.getAttribute("data-pos");
+
+    var translateValue = "translate3d(" + position + ", 0px, 0)";
+    container.style.transform = translateValue;
+
+    for (var i = 0; i < this.links.length; i++) {
+      this.links[i].classList.remove("active");
+    }
+
+    link.classList.add("active");
+
+    localStorage.setItem("currentNewsLink", currentLinkIndex);
 
   }
 }
@@ -632,6 +657,7 @@ var app = function(){
   var sonarButton = document.getElementById('sonar-button');
   sonarButton.onclick = ui.playSonarSound.bind(this);
 
+  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
 };
 
 window.onload = app;

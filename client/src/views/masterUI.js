@@ -16,7 +16,7 @@ var UI = function(){
     this.populateMissionDiv(results);
   }.bind(this));
 
-  var newsUI = new NewsUI();
+  this.newsUI = new NewsUI();
 
   this.showMap();
 
