@@ -23,9 +23,9 @@ MapWrapper.prototype = {
      position: coords,
      map: this.googleMap,
      icon: "http://i.imgur.com/xsK9snx.png"
-   });
- },
-
+   })
+ }
+ 
 }
 
 
