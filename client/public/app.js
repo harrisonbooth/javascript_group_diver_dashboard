@@ -11,10 +11,8 @@ var app = function(){
   ui.depthGauge.adjustDisplay();
   setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
 
-  // var sonarButton = document.getElementById('sonar-button');
-  // sonarButton.onclick = ui.playSonarSound.bind(this);
-
   setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
+
 };
 
 window.onload = app;

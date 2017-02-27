@@ -124,6 +124,7 @@ UI.prototype = {
     });
 
     var defaultOption = document.createElement('option');
+    defaultOption.classList.add("entry-option");
     defaultOption.selected = 'true';
     defaultOption.disabled = 'false';
     defaultOption.innerText = "Please select an entry";
@@ -131,6 +132,7 @@ UI.prototype = {
 
     results.forEach(function(entry){
       var option = document.createElement('option');
+      option.classList.add("entry-option");
       if (entry.timestamp !== undefined){
         option.innerText = ("[" + entry.entryNumber + "] " + entry.timestamp);
         option.value = entry.entryNumber;
@@ -211,7 +213,6 @@ UI.prototype = {
 
   handleUpdateButtonClick: function(){
     var oldContent = document.getElementById('entry-content-view').innerText;
-    // var oldTimestamp = document.getElementById('entry-timestamp-view');
 
     var oldElements = document.querySelectorAll('#journal-entry-container *');
     var entryContainer = document.getElementById('journal-entry-container');
@@ -273,7 +274,7 @@ UI.prototype = {
 
   showMap: function(){
     var container = document.getElementById('google-map-container');
-    var center = {lat: 11.316667, lng: 142.25};
+    var center = {lat: 27.25, lng: -111.5};
     var zoom = 8;
     var mainMap = new MapWrapper(center, zoom, container);
 
@@ -289,19 +290,38 @@ UI.prototype = {
 
   populateMissionDiv: function(results){
     var container = document.getElementById('mission-updates-container');
+    var missionArray = [];
 
-    results.forEach(function(update){
-      var p = document.createElement('p');
+    for(var update of results){
+      var updateLi = document.createElement('li');
       var trimmedContent = update.message.substring(0, 70);
-      p.innerText = "From: " + update.from + "\n" + trimmedContent + "...  ";
+      updateLi.id = 'mission-items';
+      updateLi.innerText = "From: " + update.from + "\n" + trimmedContent + "...  ";
+
       if(update.attachment === true){
         var img = document.createElement('img');
         img.id = "paperclip-icon";
         img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
-        p.appendChild(img);
+        li.appendChild(img);
       }
-      container.appendChild(p);
-    })
+
+      missionArray.push(updateLi);
+
+      var currentIndex = 0;
+
+      var advanceUpdate = function(){
+        var container = document.getElementById('mission-updates-container');
+
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+
+        currentIndex = (currentIndex + 1) % missionArray.length;
+        container.appendChild(missionArray[currentIndex]);
+        container.style.display = 'block';
+      }
+    }
+    setInterval(advanceUpdate, 8000);
   },
 
   playSonarSound: function(){
@@ -815,10 +835,8 @@ var app = function(){
   ui.depthGauge.adjustDisplay();
   setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
 
-  // var sonarButton = document.getElementById('sonar-button');
-  // sonarButton.onclick = ui.playSonarSound.bind(this);
-
   setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
+
 };
 
 window.onload = app;
