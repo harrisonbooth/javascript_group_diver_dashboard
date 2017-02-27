@@ -204,7 +204,7 @@ UI.prototype = {
 
   populateMissionDiv: function(results){
     var container = document.getElementById('mission-updates-container');
-    var array = [];
+    var missionArray = [];
 
     // results.forEach(function(update){
     for(var update of results){
@@ -218,7 +218,7 @@ UI.prototype = {
         img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
         li.appendChild(img);
       }
-      array.push(li);
+      missionArray.push(li);
 
       var currentIndex = 0;
 
@@ -228,9 +228,9 @@ UI.prototype = {
         while (container.firstChild) {
           container.removeChild(container.firstChild);
         }
-        currentIndex = (currentIndex + 1) % array.length;
 
-        container.appendChild(array[currentIndex]);
+        currentIndex = (currentIndex + 1) % missionArray.length;
+        container.appendChild(missionArray[currentIndex]);
         container.style.display = 'block';
       }
     }
