@@ -216,7 +216,7 @@ UI.prototype = {
         var img = document.createElement('img');
         img.id = "paperclip-icon";
         img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
-        li.appendChild(img);
+        updateLi.appendChild(img);
       }
 
       missionArray.push(updateLi);
