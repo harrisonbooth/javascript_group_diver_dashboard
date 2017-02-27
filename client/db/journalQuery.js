@@ -47,13 +47,13 @@ JournalQuery.prototype = {
     });
   },
 
-  updateEntry: function(desiredEntryNumber, updateContent, onQueryFinished){
+  updateEntry: function(desiredEntryNumber, newContent, onQueryFinished){
     MongoClient.connect(this.url, function(err, db){
       if(db){
         var collection = db.collection('journalEntries');
         var newTimestamp = Date().substring(0, 24);
 
-        collection.update({entryNumber: desiredEntryNumber}, {entryNumber: desiredEntryNumber, content: updateContent, timestamp: newTimestamp});
+        collection.update({entryNumber: desiredEntryNumber}, {entryNumber: desiredEntryNumber, content: newContent, timestamp: newTimestamp});
         collection.find().toArray(function(err, entryDocs){
           onQueryFinished(entryDocs);
         });
