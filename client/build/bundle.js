@@ -217,7 +217,7 @@ UI.prototype = {
 
   showMap: function(){
     var container = document.getElementById('google-map-container');
-    var center = {lat: 51.5, lng: -0.129};
+    var center = {lat: 55.9468761, lng: -3.2018152000000004};
     var zoom = 10;
     var mainMap = new MapWrapper(center, zoom, container);
 
