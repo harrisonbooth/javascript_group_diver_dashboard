@@ -19,6 +19,7 @@ var UI = function(){
   this.newsUI = new NewsUI();
 
   this.showMap();
+  this.playSonarSound();
 
   this.depthGauge = new NumberWidget(100);
   widgetContainer = document.getElementById('widget-container');
@@ -161,15 +162,16 @@ UI.prototype = {
   },
 
   playSonarSound: function(){
-    var sonarAudio = new Audio('sonar-sound.mp3');
+    var audioTag = document.createElement('audio');
+    audioTag.src = 'sonar-sound.mp3';
     var sonarButton = document.getElementById('sonar-button');
+    var stopButton = document.getElementById('stop-button');
 
-    if(sonarButton.innerText === "Sonar"){
-      sonarAudio.play();
-      sonarButton.innerText = "Stop Sonar";
-    } else {
-      sonarAudio.pause();
-      sonarButton.innerText = "Sonar";
+    sonarButton.onclick = function(){
+      audioTag.play();
+    };
+    stopButton.onclick = function(){
+      audioTag.pause();
     }
   }
 };
