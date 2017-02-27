@@ -49,17 +49,14 @@
   width: 13px;
 }
 
-#mission-updates-container {
-  display: none;
 
-}
 
 
 /* ----------HEADER------*/
 
 #header {
-  width:1300px;
-  height: 140px;
+  width:1319px;
+  height: 130px;
   background-color: green;
 }
 
@@ -103,14 +100,18 @@
 
 #map-wrapper {
   background-color: orange;
-  width: 360px;
+  width: 350px;
+  float: right;
+  position: relative;
+  bottom: 500px;
+  right: 95px;
 
 }
 
 
 #google-map-container{
   width: 350px;
-  height: 350px;
+  height: 341px;
 }
 
 
@@ -149,7 +150,7 @@ background-color: purple;
 
 #fam-messages {
   height:140px;
-  width: 560px;
+  width: 620px;
   background-color: lightblue;
   float: left;
 }
@@ -162,10 +163,12 @@ background-color: purple;
 }
 
 #widget-container {
-  position: relative;
   height: 500px;
   width: 150px;
   background-color: blue;
+  position: absolute;
+  left: 1177px;
+  bottom: 65px;
 }
 
 #widget-wrapper {
@@ -174,4 +177,8 @@ background-color: purple;
   background-color: blue;
   position: absolute;
   bottom: 0;
+}
+
+#sonar-activate {
+  display: none;
 }
