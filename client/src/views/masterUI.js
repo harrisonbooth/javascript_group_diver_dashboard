@@ -234,7 +234,7 @@ UI.prototype = {
         container.style.display = 'block';
       }
     }
-    setInterval(advanceUpdate, 5000);
+    setInterval(advanceUpdate, 8000);
   },
 
   playSonarSound: function(){
