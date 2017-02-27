@@ -306,18 +306,18 @@ UI.prototype = {
       array.push(li);
 
       var currentIndex = 0;
-
       var advanceUpdate = function(){
         var container = document.getElementById('mission-updates-container');
 
         currentIndex = (currentIndex + 1) % array.length;
         container.appendChild(array[currentIndex]);
         container.style.display = 'block';
-      }
+        setInterval(advanceUpdate, 5000);
 
-      setInterval(advanceUpdate(), 5000);
-      
+      }
+      advanceUpdate();
     })
+
   },
 
   playSonarSound: function(){
@@ -830,9 +830,6 @@ var app = function(){
 
   ui.depthGauge.adjustDisplay();
   setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
-
-  // var sonarButton = document.getElementById('sonar-button');
-  // sonarButton.onclick = ui.playSonarSound.bind(this);
 
   setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
 };

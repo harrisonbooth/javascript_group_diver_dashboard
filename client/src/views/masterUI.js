@@ -220,18 +220,18 @@ UI.prototype = {
       array.push(li);
 
       var currentIndex = 0;
-
       var advanceUpdate = function(){
         var container = document.getElementById('mission-updates-container');
 
         currentIndex = (currentIndex + 1) % array.length;
         container.appendChild(array[currentIndex]);
         container.style.display = 'block';
-      }
+        setInterval(advanceUpdate, 5000);
 
-      setInterval(advanceUpdate(), 5000);
-      
+      }
+      advanceUpdate();
     })
+
   },
 
   playSonarSound: function(){
