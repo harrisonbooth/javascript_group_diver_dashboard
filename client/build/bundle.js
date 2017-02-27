@@ -290,21 +290,22 @@ UI.prototype = {
 
   populateMissionDiv: function(results){
     var container = document.getElementById('mission-updates-container');
-    var array = [];
+    var missionArray = [];
 
-    // results.forEach(function(update){
     for(var update of results){
-      var li = document.createElement('li');
-      li.id = 'mission-items';
+      var updateLi = document.createElement('li');
       var trimmedContent = update.message.substring(0, 70);
-      li.innerText = "From: " + update.from + "\n" + trimmedContent + "...  ";
+      updateLi.id = 'mission-items';
+      updateLi.innerText = "From: " + update.from + "\n" + trimmedContent + "...  ";
+
       if(update.attachment === true){
         var img = document.createElement('img');
         img.id = "paperclip-icon";
         img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
         li.appendChild(img);
       }
-      array.push(li);
+      
+      missionArray.push(updateLi);
 
       var currentIndex = 0;
 
@@ -314,13 +315,13 @@ UI.prototype = {
         while (container.firstChild) {
           container.removeChild(container.firstChild);
         }
-        currentIndex = (currentIndex + 1) % array.length;
 
-        container.appendChild(array[currentIndex]);
+        currentIndex = (currentIndex + 1) % missionArray.length;
+        container.appendChild(missionArray[currentIndex]);
         container.style.display = 'block';
       }
     }
-    setInterval(advanceUpdate, 5000);
+    setInterval(advanceUpdate, 8000);
   },
 
   playSonarSound: function(){
