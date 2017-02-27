@@ -91,6 +91,7 @@ var UI = function(){
   this.newsUI = new NewsUI();
 
   this.showMap();
+  localStorage.setItem('sonarCount', 0);
   this.playSonarSound();
 
   this.depthGauge = new NumberWidget(100);
@@ -234,15 +235,12 @@ UI.prototype = {
   },
 
   playSonarSound: function(){
-    if(localStorage.getItem('sonarCount') === null){
-      localStorage.setItem('sonarCount', 0);
-    }
     var audioTag = document.createElement('audio');
     audioTag.src = 'sonar-sound.mp3';
     var sonarButton = document.getElementById('sonar-button');
 
     sonarButton.onclick = function(){
-      var sonarCount = localStorage.getItem('sonarCount');
+      var sonarCount = parseInt(localStorage.getItem('sonarCount'));
       if(sonarCount % 2 === 0){
         audioTag.play();
       } else {
