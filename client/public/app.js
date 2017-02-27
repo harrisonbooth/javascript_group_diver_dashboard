@@ -12,6 +12,7 @@ var app = function(){
   setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
 
   setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
+
 };
 
 window.onload = app;

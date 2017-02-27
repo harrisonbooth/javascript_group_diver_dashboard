@@ -292,7 +292,8 @@ UI.prototype = {
     var container = document.getElementById('mission-updates-container');
     var array = [];
 
-    results.forEach(function(update){
+    // results.forEach(function(update){
+    for(var update of results){
       var li = document.createElement('li');
       li.id = 'mission-items';
       var trimmedContent = update.message.substring(0, 70);
@@ -306,17 +307,34 @@ UI.prototype = {
       array.push(li);
 
       var currentIndex = 0;
+
       var advanceUpdate = function(){
         var container = document.getElementById('mission-updates-container');
 
+        // var oldElements = document.querySelectorAll('#mission-updates-container *');
+        // for(var element of oldElements){
+        //   container.removeChild(element);
+        // }
+
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+
         currentIndex = (currentIndex + 1) % array.length;
+
         container.appendChild(array[currentIndex]);
         container.style.display = 'block';
-        setInterval(advanceUpdate, 5000);
 
+        // if(container.childNodes.length > 1 && array.length > 3){
+        //   container.removeChild(container);
+        // }
+
+        // setInterval(advanceUpdate, 1000);
       }
-      advanceUpdate();
-    })
+
+
+    }
+    setInterval(advanceUpdate, 5000);
 
   },
 
@@ -832,6 +850,7 @@ var app = function(){
   setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
 
   setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
+
 };
 
 window.onload = app;
