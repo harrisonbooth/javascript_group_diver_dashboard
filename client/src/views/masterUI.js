@@ -225,31 +225,16 @@ UI.prototype = {
       var advanceUpdate = function(){
         var container = document.getElementById('mission-updates-container');
 
-        // var oldElements = document.querySelectorAll('#mission-updates-container *');
-        // for(var element of oldElements){
-        //   container.removeChild(element);
-        // }
-
         while (container.firstChild) {
           container.removeChild(container.firstChild);
         }
-
         currentIndex = (currentIndex + 1) % array.length;
 
         container.appendChild(array[currentIndex]);
         container.style.display = 'block';
-
-        // if(container.childNodes.length > 1 && array.length > 3){
-        //   container.removeChild(container);
-        // }
-
-        // setInterval(advanceUpdate, 1000);
       }
-
-
     }
     setInterval(advanceUpdate, 5000);
-
   },
 
   playSonarSound: function(){
