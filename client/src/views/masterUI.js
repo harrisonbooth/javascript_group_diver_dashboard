@@ -158,6 +158,19 @@ UI.prototype = {
       }
       container.appendChild(p);
     })
+  },
+
+  playSonarSound: function(){
+    var sonarAudio = new Audio('sonar-sound.mp3');
+    var sonarButton = document.getElementById('sonar-button');
+
+    if(sonarButton.innerText === "Sonar"){
+      sonarAudio.play();
+      sonarButton.innerText = "Stop Sonar";
+    } else {
+      sonarAudio.pause();
+      sonarButton.innerText = "Sonar";
+    }
   }
 };
 
