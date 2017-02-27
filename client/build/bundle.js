@@ -274,7 +274,7 @@ UI.prototype = {
 
   showMap: function(){
     var container = document.getElementById('google-map-container');
-    var center = {lat: 11.316667, lng: 142.25};
+    var center = {lat: 27.25, lng: -111.5};
     var zoom = 8;
     var mainMap = new MapWrapper(center, zoom, container);
 
@@ -304,7 +304,7 @@ UI.prototype = {
         img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
         li.appendChild(img);
       }
-      
+
       missionArray.push(updateLi);
 
       var currentIndex = 0;
