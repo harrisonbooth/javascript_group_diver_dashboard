@@ -17,7 +17,6 @@ NewsStory.prototype = {
         var jsonString = this.responseText;
         var newsResults = JSON.parse(jsonString);
         newsArray = newsResults.articles;
-        // console.log(newsArray);
 
         callback(newsArray);
       });
