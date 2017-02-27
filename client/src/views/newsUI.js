@@ -65,7 +65,7 @@ NewsUI.prototype = {
       var a = document.createElement('a');
       image.src = story.urlToImage;
       image.height = "200";
-      image.width = "220";
+      image.width = "260";
       a.setAttribute('href', story.url);
       a.innerText = story.title;
 
