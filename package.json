@@ -4,7 +4,7 @@
   "description": "An information dashboard for deepsea divers",
   "main": "server.js",
   "scripts": {
-    "test": "mocha ./client/src/models/specs",
+    "test": "mocha ./client/src/specs",
     "start": "nodemon server.js"
   },
   "repository": {
