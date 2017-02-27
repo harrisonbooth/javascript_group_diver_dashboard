@@ -1,3 +1,26 @@
+.bar-display {
+  background-color: tomato;
+  width: 15px;
+  display: inline-block;
+  margin: 5px 5px;
+}
+
+#number-display {
+  margin-top: 0px
+}
+
+#widget-container {
+  position: relative;
+  height: 150px
+}
+
+#widget-wrapper {
+  text-align: center;
+  width: 100px;
+  position: absolute;;
+  bottom: 0;
+}
+
 #google-map-container{
   width: 350px;
   height: 350px;

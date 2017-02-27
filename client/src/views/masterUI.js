@@ -1,6 +1,7 @@
 var JournalEntryList = require("../models/JournalEntryList");
 var MissionUpdate = require("../models/missionUpdate");
 var JournalEntry = require("../models/journalEntry");
+var NumberWidget = require("../models/NumberWidget");
 var MapWrapper = require("../models/mapWrapper");
 var NewsUI = require("./newsUI");
 
@@ -18,6 +19,11 @@ var UI = function(){
   var newsUI = new NewsUI();
 
   this.showMap();
+
+  this.depthGauge = new NumberWidget(100);
+  widgetContainer = document.getElementById('widget-container');
+  this.depthGauge.appendWidget(widgetContainer);
+
 };
 
 UI.prototype = {
