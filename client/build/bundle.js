@@ -305,18 +305,18 @@ UI.prototype = {
       }
       array.push(li);
 
-      var currentIndex = -1;
+      var currentIndex = 0;
+
       var advanceUpdate = function(){
-        currentIndex++;
-        if(currentIndex >= array.length){
-          currentIndex = 0;
-        }
-        var displayItem = array[currentIndex];
-        container.appendChild(displayItem);
-        displayItem.style.display = 'block';
+        var container = document.getElementById('mission-updates-container');
+
+        currentIndex = (currentIndex + 1) % array.length;
+        container.appendChild(array[currentIndex]);
+        container.style.display = 'block';
       }
 
-      setInterval(advanceUpdate(), 1000);
+      setInterval(advanceUpdate(), 5000);
+      
     })
   },
 

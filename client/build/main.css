@@ -104,10 +104,10 @@
 }
 
 #mission-updates-container {
+  display: none;
 
 }
 
 #mission-items {
-  display: none;
 
 }
