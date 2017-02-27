@@ -29,7 +29,9 @@ NewsUI.prototype = {
 
       var clickedLink = event.target;
       activeLink = clickedLink.itemID;
+      // console.log(activeLink);
 
+      localStorage.setItem("currentNewsLink", );
       changePosition(clickedLink);
     }
 
@@ -71,6 +73,10 @@ NewsUI.prototype = {
       ultraContainer.appendChild(container);
 
     });
+  },
+
+  scrollNews: function(){
+
   }
 }
 

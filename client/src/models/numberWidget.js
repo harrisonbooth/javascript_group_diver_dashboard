@@ -9,7 +9,6 @@ NumberWidget.prototype = {
   },
 
   appendWidget: function(container){
-    console.log(this.limit);
     var container = container;
     var widget = this.createWidget();
 
@@ -43,7 +42,6 @@ NumberWidget.prototype = {
   },
 
   adjustDisplay: function(){
-    console.log("Display adjusting");
     var numberDisplay = document.getElementById('number-display');
     var bar1 = document.getElementsByClassName('bar-display')[0];
     var bar2 = document.getElementsByClassName('bar-display')[1];
@@ -56,8 +54,6 @@ NumberWidget.prototype = {
       number += (Math.random() * this.limit)/8;
     }
 
-    console.log(number);
-    console.log(this.limit);
     numberDisplay.innerText = number.toFixed(0);
 
     if((Math.random() * 1) > 0.4){
