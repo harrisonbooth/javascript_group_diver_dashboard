@@ -234,18 +234,25 @@ UI.prototype = {
   },
 
   playSonarSound: function(){
+    if(localStorage.getItem('sonarCount') === null){
+      localStorage.setItem('sonarCount', 0);
+    }
     var audioTag = document.createElement('audio');
     audioTag.src = 'sonar-sound.mp3';
     var sonarButton = document.getElementById('sonar-button');
-    var stopButton = document.getElementById('stop-button');
 
     sonarButton.onclick = function(){
-      audioTag.play();
-    };
-    stopButton.onclick = function(){
-      audioTag.pause();
+      var sonarCount = localStorage.getItem('sonarCount');
+      if(sonarCount % 2 === 0){
+        audioTag.play();
+      } else {
+        audioTag.pause();
+      }
+      sonarCount += 1;
+      localStorage.setItem('sonarCount', sonarCount);
     }
   }
+
 };
 
 module.exports = UI;
