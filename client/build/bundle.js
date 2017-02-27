@@ -63,17 +63,31 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+var JournalEntry = function(content){
+  this.content = content;
+  this.timestamp = Date().substring(0, 24);
+}
+
+
+
+module.exports = JournalEntry;
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntryList = __webpack_require__(3);
+var JournalEntryList = __webpack_require__(2);
 var MissionUpdate = __webpack_require__(5);
-var JournalEntry = __webpack_require__(2);
-var NumberWidget = __webpack_require__(8);
+var JournalEntry = __webpack_require__(0);
+var NumberWidget = __webpack_require__(3);
 var MapWrapper = __webpack_require__(4);
 var NewsUI = __webpack_require__(7);
 
@@ -152,9 +166,14 @@ UI.prototype = {
       entryContainer.removeChild(element);
     });
 
+    var updateButton = document.createElement('button');
+    updateButton.id = 'update-button';
+    updateButton.innerText = 'Update entry';
+
     var deleteButton = document.createElement('button');
     deleteButton.id = 'delete-button';
     deleteButton.innerText = 'Delete Entry';
+    
     var entryContentView = document.createElement('p');
     var entryTimestampView = document.createElement('h1');
     var entryList = new JournalEntryList();
@@ -164,6 +183,7 @@ UI.prototype = {
       entryContentView.innerText = entry.content;
       entryContainer.appendChild(entryTimestampView);
       entryContainer.appendChild(entryContentView);
+      entryContainer.appendChild(updateButton)
       entryContainer.appendChild(deleteButton);
     });
     deleteButton.onclick = this.handleDeleteButtonClick.bind(this);
@@ -257,50 +277,10 @@ module.exports = UI;
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var UI = __webpack_require__(0);
-
-var app = function(){
-  var ui = new UI();
-  var select = document.getElementById('entry-select');
-  select.onchange = ui.selectEntry.bind(ui);
-
-  var button = document.getElementById('add-new-entry');
-  button.onclick = ui.newEntryForm.bind(ui);
-
-  ui.depthGauge.adjustDisplay();
-  setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
-
-  // var sonarButton = document.getElementById('sonar-button');
-  // sonarButton.onclick = ui.playSonarSound.bind(this);
-
-  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
-};
-
-window.onload = app;
-
-
-/***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-var JournalEntry = function(content){
-  this.content = content;
-  this.timestamp = Date().substring(0, 24);
-}
-
-
-
-module.exports = JournalEntry;
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntry = __webpack_require__(2); 
+var JournalEntry = __webpack_require__(0); 
 
 var JournalEntryList = function(){}
 
@@ -376,6 +356,82 @@ JournalEntryList.prototype = {
 }
 
 module.exports = JournalEntryList;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+var NumberWidget = function(limit){
+  this.limit = limit;
+};
+
+NumberWidget.prototype = {
+
+  addWidget: function(container){
+    appendWidget(container);
+  },
+
+  appendWidget: function(container){
+    var container = container;
+    var widget = this.createWidget();
+
+    container.appendChild(widget);
+  },
+
+  createWidget: function(){
+    var numberDisplay = document.createElement('p');
+    numberDisplay.id = "number-display";
+
+    var bar1 = document.createElement('div');
+    var bar2 = document.createElement('div');
+    bar1.classList.add("bar-display");
+    bar2.classList.add("bar-display");
+
+    var widgetWrapper = document.createElement('div');
+    widgetWrapper.id = "widget-wrapper";
+
+    var number = this.limit;
+    numberDisplay.innerText = number * 10;
+    bar1.style.height = "50px";
+    bar1.style.transitionDuration = "5s";
+    bar2.style.height = "75px";
+    bar2.style.transitionDuration = "2s";
+
+    widgetWrapper.appendChild(bar2);
+    widgetWrapper.appendChild(bar1);
+    widgetWrapper.appendChild(numberDisplay);
+
+    return widgetWrapper;
+  },
+
+  adjustDisplay: function(){
+    var numberDisplay = document.getElementById('number-display');
+    var bar1 = document.getElementsByClassName('bar-display')[0];
+    var bar2 = document.getElementsByClassName('bar-display')[1];
+
+    var number = parseInt(numberDisplay.innerText);
+
+    if((number/10) > (this.limit/2)){
+      number -= (Math.random() * this.limit)/8;
+    } else {
+      number += (Math.random() * this.limit)/8;
+    }
+
+    numberDisplay.innerText = number.toFixed(0);
+
+    if((Math.random() * 1) > 0.4){
+      bar1.style.height = String(number/1000 * 200) + "px";
+      bar2.style.height = String(number/1000 * 0) + "px";
+    } else {
+      bar1.style.height = String(number/1000 * 0) + "px";
+      bar2.style.height = String(number/1000 * 200) + "px";
+    }
+
+  }
+}
+
+module.exports = NumberWidget;
 
 
 /***/ }),
@@ -596,78 +652,28 @@ module.exports = NewsUI;
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-var NumberWidget = function(limit){
-  this.limit = limit;
+var UI = __webpack_require__(1);
+
+var app = function(){
+  var ui = new UI();
+  var select = document.getElementById('entry-select');
+  select.onchange = ui.selectEntry.bind(ui);
+
+  var button = document.getElementById('add-new-entry');
+  button.onclick = ui.newEntryForm.bind(ui);
+
+  ui.depthGauge.adjustDisplay();
+  setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
+
+  // var sonarButton = document.getElementById('sonar-button');
+  // sonarButton.onclick = ui.playSonarSound.bind(this);
+
+  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
 };
 
-NumberWidget.prototype = {
-
-  addWidget: function(container){
-    appendWidget(container);
-  },
-
-  appendWidget: function(container){
-    var container = container;
-    var widget = this.createWidget();
-
-    container.appendChild(widget);
-  },
-
-  createWidget: function(){
-    var numberDisplay = document.createElement('p');
-    numberDisplay.id = "number-display";
-
-    var bar1 = document.createElement('div');
-    var bar2 = document.createElement('div');
-    bar1.classList.add("bar-display");
-    bar2.classList.add("bar-display");
-
-    var widgetWrapper = document.createElement('div');
-    widgetWrapper.id = "widget-wrapper";
-
-    var number = this.limit;
-    numberDisplay.innerText = number * 10;
-    bar1.style.height = "50px";
-    bar1.style.transitionDuration = "5s";
-    bar2.style.height = "75px";
-    bar2.style.transitionDuration = "2s";
-
-    widgetWrapper.appendChild(bar2);
-    widgetWrapper.appendChild(bar1);
-    widgetWrapper.appendChild(numberDisplay);
-
-    return widgetWrapper;
-  },
-
-  adjustDisplay: function(){
-    var numberDisplay = document.getElementById('number-display');
-    var bar1 = document.getElementsByClassName('bar-display')[0];
-    var bar2 = document.getElementsByClassName('bar-display')[1];
-
-    var number = parseInt(numberDisplay.innerText);
-
-    if((number/10) > (this.limit/2)){
-      number -= (Math.random() * this.limit)/8;
-    } else {
-      number += (Math.random() * this.limit)/8;
-    }
-
-    numberDisplay.innerText = number.toFixed(0);
-
-    if((Math.random() * 1) > 0.4){
-      bar1.style.height = String(number/1000 * 200) + "px";
-      bar2.style.height = String(number/1000 * 0) + "px";
-    } else {
-      bar1.style.height = String(number/1000 * 0) + "px";
-      bar2.style.height = String(number/1000 * 200) + "px";
-    }
-
-  }
-}
-
-module.exports = NumberWidget;
+window.onload = app;
 
 
 /***/ })

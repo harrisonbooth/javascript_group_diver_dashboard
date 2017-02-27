@@ -80,9 +80,14 @@ UI.prototype = {
       entryContainer.removeChild(element);
     });
 
+    var updateButton = document.createElement('button');
+    updateButton.id = 'update-button';
+    updateButton.innerText = 'Update entry';
+
     var deleteButton = document.createElement('button');
     deleteButton.id = 'delete-button';
     deleteButton.innerText = 'Delete Entry';
+    
     var entryContentView = document.createElement('p');
     var entryTimestampView = document.createElement('h1');
     var entryList = new JournalEntryList();
@@ -92,6 +97,7 @@ UI.prototype = {
       entryContentView.innerText = entry.content;
       entryContainer.appendChild(entryTimestampView);
       entryContainer.appendChild(entryContentView);
+      entryContainer.appendChild(updateButton)
       entryContainer.appendChild(deleteButton);
     });
     deleteButton.onclick = this.handleDeleteButtonClick.bind(this);
