@@ -206,19 +206,18 @@ UI.prototype = {
     var container = document.getElementById('mission-updates-container');
     var missionArray = [];
 
-    // results.forEach(function(update){
     for(var update of results){
-      var li = document.createElement('li');
-      li.id = 'mission-items';
+      var updateLi = document.createElement('li');
+      updateLi.id = 'mission-items';
       var trimmedContent = update.message.substring(0, 70);
-      li.innerText = "From: " + update.from + "\n" + trimmedContent + "...  ";
+      updateLi.innerText = "From: " + update.from + "\n" + trimmedContent + "...  ";
       if(update.attachment === true){
         var img = document.createElement('img');
         img.id = "paperclip-icon";
         img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
         li.appendChild(img);
       }
-      missionArray.push(li);
+      missionArray.push(updateLi);
 
       var currentIndex = 0;
 
