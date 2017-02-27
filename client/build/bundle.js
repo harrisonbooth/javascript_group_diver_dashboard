@@ -124,6 +124,7 @@ UI.prototype = {
     });
 
     var defaultOption = document.createElement('option');
+    defaultOption.classList.add("entry-option");
     defaultOption.selected = 'true';
     defaultOption.disabled = 'false';
     defaultOption.innerText = "Please select an entry";
@@ -131,6 +132,7 @@ UI.prototype = {
 
     results.forEach(function(entry){
       var option = document.createElement('option');
+      option.classList.add("entry-option");
       if (entry.timestamp !== undefined){
         option.innerText = ("[" + entry.entryNumber + "] " + entry.timestamp);
         option.value = entry.entryNumber;
