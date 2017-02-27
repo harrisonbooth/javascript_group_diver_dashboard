@@ -127,7 +127,6 @@ UI.prototype = {
 
   handleUpdateButtonClick: function(){
     var oldContent = document.getElementById('entry-content-view').innerText;
-    // var oldTimestamp = document.getElementById('entry-timestamp-view');
 
     var oldElements = document.querySelectorAll('#journal-entry-container *');
     var entryContainer = document.getElementById('journal-entry-container');
@@ -205,18 +204,33 @@ UI.prototype = {
 
   populateMissionDiv: function(results){
     var container = document.getElementById('mission-updates-container');
+    var array = [];
 
     results.forEach(function(update){
-      var p = document.createElement('p');
+      var li = document.createElement('li');
+      li.id = 'mission-items';
       var trimmedContent = update.message.substring(0, 70);
-      p.innerText = "From: " + update.from + "\n" + trimmedContent + "...  ";
+      li.innerText = "From: " + update.from + "\n" + trimmedContent + "...  ";
       if(update.attachment === true){
         var img = document.createElement('img');
         img.id = "paperclip-icon";
         img.src = "http://icons.veryicon.com/ico/System/iOS%207/Very%20Basic%20Paper%20Clip.ico";
-        p.appendChild(img);
+        li.appendChild(img);
       }
-      container.appendChild(p);
+      array.push(li);
+
+      var currentIndex = -1;
+      var advanceUpdate = function(){
+        currentIndex++;
+        if(currentIndex >= array.length){
+          currentIndex = 0;
+        }
+        var displayItem = array[currentIndex];
+        container.appendChild(displayItem);
+        displayItem.style.display = 'block';
+      }
+
+      setInterval(advanceUpdate(), 1000);
     })
   },
 
