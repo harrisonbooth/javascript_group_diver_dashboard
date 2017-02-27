@@ -80,11 +80,18 @@ UI.prototype = {
       entryContainer.removeChild(element);
     });
 
+    var updateButton = document.createElement('button');
+    updateButton.id = 'update-button';
+    updateButton.innerText = 'Update entry';
+
     var deleteButton = document.createElement('button');
     deleteButton.id = 'delete-button';
     deleteButton.innerText = 'Delete Entry';
+
     var entryContentView = document.createElement('p');
+    entryContentView.id = 'entry-content-view';
     var entryTimestampView = document.createElement('h1');
+    entryTimestampView.id = 'entry-timestamp-view';
     var entryList = new JournalEntryList();
 
     entryList.selectEntry(selectedEntryNumber, function(entry) {
@@ -92,8 +99,10 @@ UI.prototype = {
       entryContentView.innerText = entry.content;
       entryContainer.appendChild(entryTimestampView);
       entryContainer.appendChild(entryContentView);
+      entryContainer.appendChild(updateButton)
       entryContainer.appendChild(deleteButton);
     });
+    updateButton.onclick = this.handleUpdateButtonClick.bind(this);
     deleteButton.onclick = this.handleDeleteButtonClick.bind(this);
   },
 
@@ -104,6 +113,51 @@ UI.prototype = {
     var newEntry = new JournalEntry(newContent);
 
     entryList.newEntry(newEntry, function(results){
+      this.populateSelect(results);
+    }.bind(this));
+
+    var oldElements = document.querySelectorAll('#journal-entry-container *');
+    var entryContainer = document.getElementById('journal-entry-container');
+    oldElements.forEach(function(element){
+      entryContainer.removeChild(element);
+    });
+  },
+
+  handleUpdateButtonClick: function(){
+    var oldContent = document.getElementById('entry-content-view').innerText;
+    // var oldTimestamp = document.getElementById('entry-timestamp-view');
+
+    var oldElements = document.querySelectorAll('#journal-entry-container *');
+    var entryContainer = document.getElementById('journal-entry-container');
+    oldElements.forEach(function(element){
+      entryContainer.removeChild(element);
+    });
+
+    var select = document.getElementById('entry-select');
+    var entryNumber = select.value;
+    var input = document.createElement('input');
+    input.id = 'new-content-input';
+    input.value = oldContent;
+
+    var submitButton = document.createElement('button');
+    submitButton.id = 'submit-button';
+    submitButton.innerText = 'Update';
+
+    entryContainer.appendChild(input);
+    entryContainer.appendChild(submitButton);
+
+    submitButton.onclick = this.handleUpdateSubmitButtonClick.bind(this);
+  },
+
+  handleUpdateSubmitButtonClick: function(){
+    var entryList = new JournalEntryList();
+    var newContentInput = document.getElementById('new-content-input');
+    var newContent = newContentInput.value;
+    var select = document.getElementById('entry-select');
+    var entryNumberToBeUpdated = select.value;
+    var newContentObject = {content: newContent}
+
+    entryList.updateEntry(entryNumberToBeUpdated, newContentObject, function(results){
       this.populateSelect(results);
     }.bind(this));
 
