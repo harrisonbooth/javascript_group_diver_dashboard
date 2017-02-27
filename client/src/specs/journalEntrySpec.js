@@ -13,8 +13,8 @@ describe('JournalEntry', function(){
 
     it('should have a timestamp', function(){
       assert.notEqual(null, entry.timestamp);
-    })
+    });
 
-  })
+  });
 
 });
