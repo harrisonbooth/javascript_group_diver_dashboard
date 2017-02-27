@@ -3,7 +3,6 @@ var MapWrapper = function(coords, zoom, container){
     center: coords,
     zoom: zoom
   });
-  this.getUserLocation();
 };
 
 MapWrapper.prototype = {
@@ -23,7 +22,7 @@ MapWrapper.prototype = {
    var marker = new google.maps.Marker({
      position: coords,
      map: this.googleMap,
-     icon: "http://i.imgur.com/sUxB3aV.png"
+     icon: "http://imgur.com/Bzs3N7U"
    });
  },
 

@@ -133,16 +133,18 @@ UI.prototype = {
 
   showMap: function(){
     var container = document.getElementById('google-map-container');
-    var center = {lat: 55.9468761, lng: -3.2018152000000004};
-    var zoom = 10;
+    var center = {lat: 11.316667, lng: 142.25};
+    var zoom = 8;
     var mainMap = new MapWrapper(center, zoom, container);
 
     var mapControls = document.getElementById('map-controller');
     var returnGeoLocation = document.createElement('button');
-    returnGeoLocation.innerText = 'My Location';
+    returnGeoLocation.innerText = 'Home';
     returnGeoLocation.id = 'user-location-button';
     mapControls.appendChild(returnGeoLocation);
     returnGeoLocation.onclick = mainMap.getUserLocation.bind(mainMap);
+
+    mainMap.addMarker(center);
   },
 
   populateMissionDiv: function(results){

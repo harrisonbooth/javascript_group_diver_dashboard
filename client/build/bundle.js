@@ -63,17 +63,31 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+var JournalEntry = function(content){
+  this.content = content;
+  this.timestamp = Date().substring(0, 24);
+}
+
+
+
+module.exports = JournalEntry;
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntryList = __webpack_require__(3);
+var JournalEntryList = __webpack_require__(2);
 var MissionUpdate = __webpack_require__(5);
-var JournalEntry = __webpack_require__(2);
-var NumberWidget = __webpack_require__(8);
+var JournalEntry = __webpack_require__(0);
+var NumberWidget = __webpack_require__(3);
 var MapWrapper = __webpack_require__(4);
 var NewsUI = __webpack_require__(7);
 
@@ -205,16 +219,18 @@ UI.prototype = {
 
   showMap: function(){
     var container = document.getElementById('google-map-container');
-    var center = {lat: 55.9468761, lng: -3.2018152000000004};
-    var zoom = 10;
+    var center = {lat: 11.316667, lng: 142.25};
+    var zoom = 8;
     var mainMap = new MapWrapper(center, zoom, container);
 
     var mapControls = document.getElementById('map-controller');
     var returnGeoLocation = document.createElement('button');
-    returnGeoLocation.innerText = 'My Location';
+    returnGeoLocation.innerText = 'Home';
     returnGeoLocation.id = 'user-location-button';
     mapControls.appendChild(returnGeoLocation);
     returnGeoLocation.onclick = mainMap.getUserLocation.bind(mainMap);
+
+    mainMap.addMarker(center);
   },
 
   populateMissionDiv: function(results){
@@ -257,50 +273,10 @@ module.exports = UI;
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var UI = __webpack_require__(0);
-
-var app = function(){
-  var ui = new UI();
-  var select = document.getElementById('entry-select');
-  select.onchange = ui.selectEntry.bind(ui);
-
-  var button = document.getElementById('add-new-entry');
-  button.onclick = ui.newEntryForm.bind(ui);
-
-  ui.depthGauge.adjustDisplay();
-  setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
-
-  // var sonarButton = document.getElementById('sonar-button');
-  // sonarButton.onclick = ui.playSonarSound.bind(this);
-
-  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
-};
-
-window.onload = app;
-
-
-/***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-var JournalEntry = function(content){
-  this.content = content;
-  this.timestamp = Date().substring(0, 24);
-}
-
-
-
-module.exports = JournalEntry;
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntry = __webpack_require__(2); 
+var JournalEntry = __webpack_require__(0); 
 
 var JournalEntryList = function(){}
 
@@ -379,6 +355,82 @@ module.exports = JournalEntryList;
 
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+var NumberWidget = function(limit){
+  this.limit = limit;
+};
+
+NumberWidget.prototype = {
+
+  addWidget: function(container){
+    appendWidget(container);
+  },
+
+  appendWidget: function(container){
+    var container = container;
+    var widget = this.createWidget();
+
+    container.appendChild(widget);
+  },
+
+  createWidget: function(){
+    var numberDisplay = document.createElement('p');
+    numberDisplay.id = "number-display";
+
+    var bar1 = document.createElement('div');
+    var bar2 = document.createElement('div');
+    bar1.classList.add("bar-display");
+    bar2.classList.add("bar-display");
+
+    var widgetWrapper = document.createElement('div');
+    widgetWrapper.id = "widget-wrapper";
+
+    var number = this.limit;
+    numberDisplay.innerText = number * 10;
+    bar1.style.height = "50px";
+    bar1.style.transitionDuration = "5s";
+    bar2.style.height = "75px";
+    bar2.style.transitionDuration = "2s";
+
+    widgetWrapper.appendChild(bar2);
+    widgetWrapper.appendChild(bar1);
+    widgetWrapper.appendChild(numberDisplay);
+
+    return widgetWrapper;
+  },
+
+  adjustDisplay: function(){
+    var numberDisplay = document.getElementById('number-display');
+    var bar1 = document.getElementsByClassName('bar-display')[0];
+    var bar2 = document.getElementsByClassName('bar-display')[1];
+
+    var number = parseInt(numberDisplay.innerText);
+
+    if((number/10) > (this.limit/2)){
+      number -= (Math.random() * this.limit)/8;
+    } else {
+      number += (Math.random() * this.limit)/8;
+    }
+
+    numberDisplay.innerText = number.toFixed(0);
+
+    if((Math.random() * 1) > 0.4){
+      bar1.style.height = String(number/1000 * 200) + "px";
+      bar2.style.height = String(number/1000 * 0) + "px";
+    } else {
+      bar1.style.height = String(number/1000 * 0) + "px";
+      bar2.style.height = String(number/1000 * 200) + "px";
+    }
+
+  }
+}
+
+module.exports = NumberWidget;
+
+
+/***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
@@ -387,7 +439,6 @@ var MapWrapper = function(coords, zoom, container){
     center: coords,
     zoom: zoom
   });
-  this.getUserLocation();
 };
 
 MapWrapper.prototype = {
@@ -407,7 +458,7 @@ MapWrapper.prototype = {
    var marker = new google.maps.Marker({
      position: coords,
      map: this.googleMap,
-     icon: "http://i.imgur.com/sUxB3aV.png"
+     icon: "http://imgur.com/Bzs3N7U"
    });
  },
 
@@ -596,78 +647,28 @@ module.exports = NewsUI;
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-var NumberWidget = function(limit){
-  this.limit = limit;
+var UI = __webpack_require__(1);
+
+var app = function(){
+  var ui = new UI();
+  var select = document.getElementById('entry-select');
+  select.onchange = ui.selectEntry.bind(ui);
+
+  var button = document.getElementById('add-new-entry');
+  button.onclick = ui.newEntryForm.bind(ui);
+
+  ui.depthGauge.adjustDisplay();
+  setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
+
+  // var sonarButton = document.getElementById('sonar-button');
+  // sonarButton.onclick = ui.playSonarSound.bind(this);
+
+  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
 };
 
-NumberWidget.prototype = {
-
-  addWidget: function(container){
-    appendWidget(container);
-  },
-
-  appendWidget: function(container){
-    var container = container;
-    var widget = this.createWidget();
-
-    container.appendChild(widget);
-  },
-
-  createWidget: function(){
-    var numberDisplay = document.createElement('p');
-    numberDisplay.id = "number-display";
-
-    var bar1 = document.createElement('div');
-    var bar2 = document.createElement('div');
-    bar1.classList.add("bar-display");
-    bar2.classList.add("bar-display");
-
-    var widgetWrapper = document.createElement('div');
-    widgetWrapper.id = "widget-wrapper";
-
-    var number = this.limit;
-    numberDisplay.innerText = number * 10;
-    bar1.style.height = "50px";
-    bar1.style.transitionDuration = "5s";
-    bar2.style.height = "75px";
-    bar2.style.transitionDuration = "2s";
-
-    widgetWrapper.appendChild(bar2);
-    widgetWrapper.appendChild(bar1);
-    widgetWrapper.appendChild(numberDisplay);
-
-    return widgetWrapper;
-  },
-
-  adjustDisplay: function(){
-    var numberDisplay = document.getElementById('number-display');
-    var bar1 = document.getElementsByClassName('bar-display')[0];
-    var bar2 = document.getElementsByClassName('bar-display')[1];
-
-    var number = parseInt(numberDisplay.innerText);
-
-    if((number/10) > (this.limit/2)){
-      number -= (Math.random() * this.limit)/8;
-    } else {
-      number += (Math.random() * this.limit)/8;
-    }
-
-    numberDisplay.innerText = number.toFixed(0);
-
-    if((Math.random() * 1) > 0.4){
-      bar1.style.height = String(number/1000 * 200) + "px";
-      bar2.style.height = String(number/1000 * 0) + "px";
-    } else {
-      bar1.style.height = String(number/1000 * 0) + "px";
-      bar2.style.height = String(number/1000 * 200) + "px";
-    }
-
-  }
-}
-
-module.exports = NumberWidget;
+window.onload = app;
 
 
 /***/ })
