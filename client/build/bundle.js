@@ -458,7 +458,7 @@ MapWrapper.prototype = {
    var marker = new google.maps.Marker({
      position: coords,
      map: this.googleMap,
-     icon: "http://imgur.com/Bzs3N7U"
+     icon: "http://i.imgur.com/xsK9snx.png"
    });
  },
 
