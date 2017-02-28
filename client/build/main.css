@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Arca";
-  src: url('build/ArcaMajora-Heavy.ttf');
+  src: url('ArcaMajora-Heavy.ttf') format('truetype'),url('ArcaMajora-Heavy.woff') format('woff'),url('ArcaMajora-Heavy.woff2') format('woff2');
 }
 
 
