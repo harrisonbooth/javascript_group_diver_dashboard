@@ -88,6 +88,7 @@ var JournalEntryList = __webpack_require__(2);
 var MissionUpdate = __webpack_require__(5);
 var JournalEntry = __webpack_require__(0);
 var NumberWidget = __webpack_require__(3);
+var dateTimeWidget = __webpack_require__(10)
 var MapWrapper = __webpack_require__(4);
 var NewsUI = __webpack_require__(7);
 
@@ -112,6 +113,9 @@ var UI = function(){
   widgetContainer = document.getElementById('widget-container');
   this.depthGauge.appendWidget(widgetContainer);
 
+  var header = document.querySelector('#header');
+  this.dateTimeWidget = new dateTimeWidget(header);
+  this.dateTimeWidget.appendWidget();
 };
 
 UI.prototype = {
@@ -827,7 +831,7 @@ var Game = __webpack_require__(9);
 
 
 var app = function(){
-  
+
   var ui = new UI();
   var select = document.getElementById('entry-select');
   select.onchange = ui.selectEntry.bind(ui);
@@ -839,6 +843,8 @@ var app = function(){
   setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
 
   setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
+
+  setInterval(ui.dateTimeWidget.updateWidget.bind(ui.dateTimeWidget), 1000);
 
   var game = new Game();
 
@@ -1160,6 +1166,68 @@ function updateGameArea() {
 }
 
 module.exports = startGame;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+var dateTimeWidget = function(container){
+    this.container = container;
+};
+
+dateTimeWidget.prototype = {
+  appendWidget: function(){
+    var widget = this.createWidget();
+    this.container.appendChild(widget);
+  },
+
+  createWidget: function(){
+    var widgetDiv = document.createElement('div');
+    widgetDiv.id = "widget-wrapper";
+
+    var timeDiv = document.createElement('div');
+    timeDiv.id = "time-wrapper";
+    var dateDiv = document.createElement('div');
+    dateDiv.id = "date-wrapper";
+
+    var timeP = document.createElement('p');
+    timeP.id = "time-display";
+
+    var dateP = document.createElement('p');
+    dateP.id = "date-display";
+
+    var dateTime = Date();
+    var date = dateTime.substring(0, 15);
+    var time = dateTime.substring(16, 21);
+
+    dateP.innerText = date;
+    timeP.innerText = time;
+
+    dateDiv.appendChild(dateP);
+    timeDiv.appendChild(timeP);
+
+    widgetDiv.appendChild(dateDiv);
+    widgetDiv.appendChild(timeDiv);
+
+    return widgetDiv;
+  },
+
+  updateWidget: function(){
+    var dateP = document.getElementById('date-display');
+    var timeP = document.getElementById('time-display');
+
+    var dateTime = Date();
+    var date = dateTime.substring(0, 15);
+    var time = dateTime.substring(16, 21);
+
+    dateP.innerText = date;
+    timeP.innerText = time;
+  }
+
+}
+
+module.exports = dateTimeWidget;
+
 
 /***/ })
 /******/ ]);
