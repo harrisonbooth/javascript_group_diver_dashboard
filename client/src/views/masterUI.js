@@ -23,9 +23,9 @@ var UI = function(){
   localStorage.setItem('sonarCount', 0);
   this.playSonarSound();
 
-  this.depthGauge = new NumberWidget(100);
-  widgetContainer = document.getElementById('widget-container');
-  this.depthGauge.appendWidget(widgetContainer);
+  // this.depthGauge = new NumberWidget(100);
+  // widgetContainer = document.getElementById('widget-container');
+  // this.depthGauge.appendWidget(widgetContainer);
 
   var header = document.querySelector('#header');
   this.dateTimeWidget = new dateTimeWidget(header);

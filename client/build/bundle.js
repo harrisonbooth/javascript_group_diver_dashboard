@@ -422,9 +422,9 @@ var UI = function(){
   localStorage.setItem('sonarCount', 0);
   this.playSonarSound();
 
-  this.depthGauge = new NumberWidget(100);
-  widgetContainer = document.getElementById('widget-container');
-  this.depthGauge.appendWidget(widgetContainer);
+  // this.depthGauge = new NumberWidget(100);
+  // widgetContainer = document.getElementById('widget-container');
+  // this.depthGauge.appendWidget(widgetContainer);
 
   var header = document.querySelector('#header');
   this.dateTimeWidget = new dateTimeWidget(header);
@@ -768,76 +768,76 @@ module.exports = JournalEntryList;
 /* 4 */
 /***/ (function(module, exports) {
 
-var NumberWidget = function(limit){
-  this.limit = limit;
-};
+// var NumberWidget = function(limit){
+//   this.limit = limit;
+// };
 
-NumberWidget.prototype = {
+// NumberWidget.prototype = {
 
-  addWidget: function(container){
-    appendWidget(container);
-  },
+//   addWidget: function(container){
+//     appendWidget(container);
+//   },
 
-  appendWidget: function(container){
-    var container = container;
-    var widget = this.createWidget();
+//   appendWidget: function(container){
+//     var container = container;
+//     var widget = this.createWidget();
 
-    container.appendChild(widget);
-  },
+//     container.appendChild(widget);
+//   },
 
-  createWidget: function(){
-    var numberDisplay = document.createElement('p');
-    numberDisplay.id = "number-display";
+//   createWidget: function(){
+//     var numberDisplay = document.createElement('p');
+//     numberDisplay.id = "number-display";
 
-    var bar1 = document.createElement('div');
-    var bar2 = document.createElement('div');
-    bar1.classList.add("bar-display");
-    bar2.classList.add("bar-display");
+//     var bar1 = document.createElement('div');
+//     var bar2 = document.createElement('div');
+//     bar1.classList.add("bar-display");
+//     bar2.classList.add("bar-display");
 
-    var widgetWrapper = document.createElement('div');
-    widgetWrapper.id = "widget-wrapper";
+//     var widgetWrapper = document.createElement('div');
+//     widgetWrapper.id = "widget-wrapper";
 
-    var number = this.limit;
-    numberDisplay.innerText = number * 10;
-    bar1.style.height = "50px";
-    bar1.style.transitionDuration = "5s";
-    bar2.style.height = "75px";
-    bar2.style.transitionDuration = "2s";
+//     var number = this.limit;
+//     numberDisplay.innerText = number * 10;
+//     bar1.style.height = "50px";
+//     bar1.style.transitionDuration = "5s";
+//     bar2.style.height = "75px";
+//     bar2.style.transitionDuration = "2s";
 
-    widgetWrapper.appendChild(bar2);
-    widgetWrapper.appendChild(bar1);
-    widgetWrapper.appendChild(numberDisplay);
+//     widgetWrapper.appendChild(bar2);
+//     widgetWrapper.appendChild(bar1);
+//     widgetWrapper.appendChild(numberDisplay);
 
-    return widgetWrapper;
-  },
+//     return widgetWrapper;
+//   },
 
-  adjustDisplay: function(){
-    var numberDisplay = document.getElementById('number-display');
-    var bar1 = document.getElementsByClassName('bar-display')[0];
-    var bar2 = document.getElementsByClassName('bar-display')[1];
+//   adjustDisplay: function(){
+//     var numberDisplay = document.getElementById('number-display');
+//     var bar1 = document.getElementsByClassName('bar-display')[0];
+//     var bar2 = document.getElementsByClassName('bar-display')[1];
 
-    var number = parseInt(numberDisplay.innerText);
+//     var number = parseInt(numberDisplay.innerText);
 
-    if((number/10) > (this.limit/2)){
-      number -= (Math.random() * this.limit)/8;
-    } else {
-      number += (Math.random() * this.limit)/8;
-    }
+//     if((number/10) > (this.limit/2)){
+//       number -= (Math.random() * this.limit)/8;
+//     } else {
+//       number += (Math.random() * this.limit)/8;
+//     }
 
-    numberDisplay.innerText = number.toFixed(0);
+//     numberDisplay.innerText = number.toFixed(0);
 
-    if((Math.random() * 1) > 0.4){
-      bar1.style.height = String(number/1000 * 200) + "px";
-      bar2.style.height = String(number/1000 * 0) + "px";
-    } else {
-      bar1.style.height = String(number/1000 * 0) + "px";
-      bar2.style.height = String(number/1000 * 200) + "px";
-    }
+//     if((Math.random() * 1) > 0.4){
+//       bar1.style.height = String(number/1000 * 200) + "px";
+//       bar2.style.height = String(number/1000 * 0) + "px";
+//     } else {
+//       bar1.style.height = String(number/1000 * 0) + "px";
+//       bar2.style.height = String(number/1000 * 200) + "px";
+//     }
 
-  }
-}
+//   }
+// }
 
-module.exports = NumberWidget;
+// module.exports = NumberWidget;
 
 
 /***/ }),
@@ -1152,13 +1152,12 @@ var app = function(){
   var button = document.getElementById('add-new-entry');
   button.onclick = ui.newEntryForm.bind(ui);
 
-  ui.depthGauge.adjustDisplay();
-  setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
+    // ui.depthGauge.adjustDisplay();
+    // setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
 
   setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
 
   setInterval(ui.dateTimeWidget.updateWidget.bind(ui.dateTimeWidget), 1000);
-
   var game = new Game();
 
 };
