@@ -289,7 +289,7 @@ UI.prototype = {
   },
 
   populateMissionDiv: function(results){
-    var container = document.getElementById('mission-updates-container');
+    var container = document.getElementById('fam-messages');
     var missionArray = [];
 
     for(var update of results){
@@ -310,7 +310,7 @@ UI.prototype = {
       var currentIndex = 0;
 
       var advanceUpdate = function(){
-        var container = document.getElementById('mission-updates-container');
+        var container = document.getElementById('fam-messages');
 
         while (container.firstChild) {
           container.removeChild(container.firstChild);
