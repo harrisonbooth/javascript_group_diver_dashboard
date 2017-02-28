@@ -146,7 +146,7 @@ p#entry-content-view {
   border: none;
   padding-left: 7px;
   -webkit-appearance: none;
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -273,9 +273,18 @@ li#mission-items {
 
 
 #sonar-activate {
-  width: 170px;
+  width: 275px;
   margin: 0px;
+  height: 225px;
+  position: absolute;
+  left: 1205px;
+  bottom: 275px;
+}
 
+img#sonar-button {
+  width: 275px;
+  height: 225px;
+  cursor: pointer;
 }
 
 
