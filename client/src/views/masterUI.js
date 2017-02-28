@@ -2,6 +2,7 @@ var JournalEntryList = require("../models/JournalEntryList");
 var MissionUpdate = require("../models/missionUpdate");
 var JournalEntry = require("../models/journalEntry");
 var NumberWidget = require("../models/NumberWidget");
+var dateTimeWidget = require("../models/dateTimeWidget")
 var MapWrapper = require("../models/mapWrapper");
 var NewsUI = require("./newsUI");
 
@@ -26,6 +27,9 @@ var UI = function(){
   widgetContainer = document.getElementById('widget-container');
   this.depthGauge.appendWidget(widgetContainer);
 
+  var header = document.querySelector('#header');
+  this.dateTimeWidget = new dateTimeWidget(header);
+  this.dateTimeWidget.appendWidget();
 };
 
 UI.prototype = {
