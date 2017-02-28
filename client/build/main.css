@@ -117,7 +117,7 @@ html {
 #journal-select-container {
   background-color: #0b1033;
   width: 160px;
-  height: 500px;
+  height: 511px;
   float: left;
   margin-left: 20px;
   opacity: 0.7;
@@ -241,14 +241,18 @@ border: 5px solid #020302;
   opacity: 0.6;
   margin-left: 4px;
   border: 5px solid #020302;
+  font-size: 22px;
+}
+
+li#mission-items {
+  list-style-type: none;
+  font-family: 'Roboto', sans-serif;
+  padding-top: 15px;
 }
 
 
-/*---------- WIDGET WRAPPER ---------*/
+/*---------- SONAR WRAPPER ---------*/
 
-#number-display {
-  margin-top: 0px
-}
 
 
 #sonar-activate {
@@ -256,6 +260,9 @@ border: 5px solid #020302;
   margin: 0px;
 
 }
+
+
+/*------------------ GAME CONTAINER -------------------------*/
 
 #canvas{
   background: -webkit-radial-gradient(circle, #1a82f7, #326464);
@@ -272,6 +279,8 @@ border: 5px solid #020302;
 }
 
 
+/*--------------------  TIME AND DATE-------------------------*/
+
 #widget-wrapper {
   float: right;
 /*  background: yellow;*/
@@ -281,6 +290,7 @@ border: 5px solid #020302;
 #date-display{
   font-family: 'Arca';
   color: white;
+  opacity: 0.8;
   font-size: 36px;
   margin-bottom: 5px;
   margin-top: 5px;
