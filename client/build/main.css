@@ -91,7 +91,7 @@ html {
 #new-content-input {
   background-color: #0b1033;
   width: 345px;
-  height: 250px;
+  height: 460px;
   font-size: 26px;
   font-family: 'Roboto', sans-serif;
   color: cyan;
@@ -119,6 +119,7 @@ html {
   width: 160px;
   height: 500px;
   float: left;
+  margin-left: 20px;
   background-image: url(http://i.imgur.com/CXier06.jpg);
 
 }
@@ -135,7 +136,9 @@ html {
 /*---------------JOURNAL BUTTON CONTRAINER -------------*/
 
 #journal-button-container {
-  background-color: #fdd559;
+  /*background-image: url("http://i.imgur.com/bR2l5IW.png");*/
+  /*background-size: cover;*/
+  /*background-color: #fdd559;*/
   height: 500px;
   width: 40px;
   float: left;
@@ -143,10 +146,14 @@ html {
 
 #add-new-entry {
   background: transparent;
-  background-image: url(http://i.imgur.com/bR2l5IW.png);
   border: none;
   height: 480px;
-  width: 39px;
+  width: 54px;
+  margin-left: 3px;
+}
+
+#add-new-entry:hover {
+  transform: rotate(3deg);
 }
 
 
@@ -261,4 +268,5 @@ font-style: none;
 #canvas{
   background: -webkit-radial-gradient(circle, #1a82f7, #326464);
   color:#d9d9d9;
+  float: right;
 }
