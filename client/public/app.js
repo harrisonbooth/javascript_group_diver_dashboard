@@ -1,6 +1,9 @@
 var UI = require('../src/views/masterUI');
+var Game = require('./game_File');
+
 
 var app = function(){
+  
   var ui = new UI();
   var select = document.getElementById('entry-select');
   select.onchange = ui.selectEntry.bind(ui);
@@ -13,6 +16,9 @@ var app = function(){
 
   setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
 
+  var game = new Game();
+
 };
+
 
 window.onload = app;

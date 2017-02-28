@@ -257,3 +257,8 @@ font-style: none;
 #sonar-activate {
   display: none;
 }
+
+canvas{
+  background: -webkit-radial-gradient(circle, #1a82f7, #326464);
+  color:#d9d9d9;
+}
