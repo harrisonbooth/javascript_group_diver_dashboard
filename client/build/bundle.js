@@ -162,10 +162,11 @@ var myGameArea = {
     this.frameNo = 0;
     this.interval = setInterval(updateGameArea, 20);
     window.addEventListener('click', function (e) { // when click, do something
+      console.log(e);
       if (alive === true){
         for(var i = 0; i < mine_array.length; i++){
-          if(e.clientX > mine_array[i].x + 7 && e.clientX < (mine_array[i].x + mine_array[i].width+ 9)){
-            if(e.clientY > mine_array[i].y + 8 && e.clientY < (mine_array[i].y + mine_array[i].height + 10)){
+          if(e.clientX -1000 > mine_array[i].x + 7 && e.clientX -1000 < (mine_array[i].x + mine_array[i].width+ 9)){
+            if(e.clientY -370 > mine_array[i].y + 8 && e.clientY -370 < (mine_array[i].y + mine_array[i].height + 10)){
               if (mine_array[i].hasMine === true){
                 mine_array[i].img.src = "./images/rsz_mine_original.png";
                 alive = false;

@@ -70,7 +70,7 @@ html {
 /* ----------HEADER------*/
 
 #header {
-  width:1319px;
+  width:1290px;
   height: 150px;
 /*  background-color: green;*/
 }
@@ -115,12 +115,12 @@ html {
 /* ------------JOUNRNAL SELECT DROPDOWN -------*/
 
 #journal-select-container {
-/*  background-color: #a9f0ff;*/
+  background-color: #0b1033;
   width: 160px;
   height: 500px;
   float: left;
   margin-left: 20px;
-  background-image: url(http://i.imgur.com/CXier06.jpg);
+  opacity: 0.7;
 
 }
 
@@ -164,8 +164,9 @@ html {
   width: 350px;
   float: right;
   position: relative;
-  bottom: 500px;
-  right: 74px;
+  bottom: 517px;
+  right: 66px;
+  border: 5px solid #020302;
 
 }
 
@@ -215,15 +216,18 @@ html {
 }
 
 
+
 #ultra-news-story-container{
   width: 260px;
   height: 355px;
-  border: 5px black solid;
   border-top: none;
   overflow: hidden;
 /*  display: inline-block;*/
 background-color: white;
+opacity: 0.80;
+padding-left: 2px;
 font-style: none;
+border: 5px solid #020302;
 
 }
 
@@ -236,6 +240,7 @@ font-style: none;
   float: left;
   opacity: 0.6;
   margin-left: 4px;
+  border: 5px solid #020302;
 }
 
 
@@ -245,24 +250,10 @@ font-style: none;
   margin-top: 0px
 }
 
-#widget-container {
-  height: 500px;
-  width: 150px;
-  background-color: #90c5c9;
-  position: absolute;
-  left: 1177px;
-  bottom: 45px;
-}
-
-#widget-wrapper {
-  text-align: center;
-  width: 100px;
-  background-color: #90c5c9;
-  position: absolute;
-  bottom: 0;
-}
 
 #sonar-activate {
+  width: 170px;
+  margin: 0px;
 
 }
 
@@ -277,5 +268,28 @@ font-style: none;
   height: 275px;
   position: relative;
   left: 1200px;
-  bottom: 275px;
+  bottom: 280px;
+}
+
+
+#widget-wrapper {
+  float: right;
+/*  background: yellow;*/
+  width: 340px;
+}
+
+#date-display{
+  font-family: 'Arca';
+  color: white;
+  font-size: 36px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+#time-display {
+  color: white;
+  font-size: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: 'Lantinghei TC';
 }
