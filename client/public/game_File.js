@@ -98,8 +98,9 @@ var myGameArea = {
     })
     document.onkeydown = function (e) { // when click, do something
       var currentKey = e.keyCode;
+      console.log(e.keyCode);
       console.log(currentKey);
-      if(currentKey === 32){
+      if(currentKey === 192){
         for(var i = 0;i < mine_array.length; i++){
           mine_array[i].clicked = false;
           mine_array[i].close_mines = null;
