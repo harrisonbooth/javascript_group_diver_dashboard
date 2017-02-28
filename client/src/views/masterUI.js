@@ -136,7 +136,7 @@ UI.prototype = {
 
     var select = document.getElementById('entry-select');
     var entryNumber = select.value;
-    var input = document.createElement('input');
+    var input = document.createElement('textarea');
     input.id = 'new-content-input';
     input.value = oldContent;
 
@@ -176,7 +176,7 @@ UI.prototype = {
       entryContainer.removeChild(element);
     });
 
-    var input = document.createElement('input');
+    var input = document.createElement('textarea');
     input.id = 'new-content-input';
     var submitButton = document.createElement('button');
     submitButton.id = 'submit-button';
