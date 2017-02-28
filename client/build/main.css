@@ -6,3 +6,8 @@
 #user-location-button{
   z-index: 9999;
 }
+
+canvas{
+  background: -webkit-radial-gradient(circle, #1a82f7, #326464);
+  color:#d9d9d9;
+}
