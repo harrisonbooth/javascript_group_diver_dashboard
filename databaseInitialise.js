@@ -28,23 +28,28 @@ use mission;
 db.missionUpdates.insert(
   [
     {
-      from: "Family",
+      from: "Family <fam@yahoo.com>",
       message: "We sent you a care package of your favourite shows... just 2 weeks to go!",
       attachment: true
     },
     {
-      from: "Marine Conservation Society, The",
+      from: "Marine Conservation Society, The <marine_society@gmail.com>",
       message: "Here are the latest figures on the impact of trawling on various fish species you asked for.",
       attachment: true
     },
     {
-      from: "Partner",
+      from: "Buddy <sushirus@aol.com>",
       message: "Hey! Had sushi tonight and thought of you... Because it's our favourite, not because you're under the sea!",
       attachment: false
     },
     {
-      from: "University of California, Berkeley",
+      from: "University of California, Berkeley <ucl-berkeley@ed.com>",
       message: "Can't wait for your figures, its really going to enhance the courses for next year.",
+      attachment: false
+    },
+    {
+      from: "Plenty of Fish <pofish@pof.com>",
+      message: "We have plenty of catches for you today! Check out these just for the halibut.",
       attachment: false
     }
   ]
