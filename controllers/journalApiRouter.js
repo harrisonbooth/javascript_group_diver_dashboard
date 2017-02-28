@@ -5,7 +5,6 @@ var JournalQuery = require('../client/db/journalQuery');
 var journalQuery = new JournalQuery();
 var JournalEntry = require('../client/src/models/journalEntry');
 
-
 journalRouter.get('/:id', function(req, res){
   var desiredEntryNumber = parseInt(req.params.id);
   journalQuery.findByEntryNumber(desiredEntryNumber, function(returnedEntry){

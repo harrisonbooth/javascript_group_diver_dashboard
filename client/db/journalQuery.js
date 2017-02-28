@@ -33,7 +33,7 @@ JournalQuery.prototype = {
         var collection = db.collection('journalEntries');
         collection.find({entryNumber: "entry number counter"}).toArray(function(err, entryNumberCounterArray){
           var newEntryNumber = entryNumberCounterArray[0].currentEntryNumber + 1;
-          
+
           collection.update(entryNumberCounterArray[0], {entryNumber: "entry number counter", currentEntryNumber: newEntryNumber});
 
           entryToAdd.entryNumber = newEntryNumber;
@@ -42,19 +42,18 @@ JournalQuery.prototype = {
           collection.find().toArray(function(err, entryDocs){
             onQueryFinished(entryDocs);
           });
-          console.log(entryNumberCounterArray[0]);
         }.bind(this));
       }
     });
   },
 
-  updateEntry: function(desiredEntryNumber, updateContent, onQueryFinished){
+  updateEntry: function(desiredEntryNumber, newContent, onQueryFinished){
     MongoClient.connect(this.url, function(err, db){
       if(db){
         var collection = db.collection('journalEntries');
         var newTimestamp = Date().substring(0, 24);
-        
-        collection.update({entryNumber: desiredEntryNumber}, {entryNumber: desiredEntryNumber, content: updateContent, timestamp: newTimestamp});
+
+        collection.update({entryNumber: desiredEntryNumber}, {entryNumber: desiredEntryNumber, content: newContent, timestamp: newTimestamp});
         collection.find().toArray(function(err, entryDocs){
           onQueryFinished(entryDocs);
         });

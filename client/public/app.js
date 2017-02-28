@@ -7,6 +7,12 @@ var app = function(){
 
   var button = document.getElementById('add-new-entry');
   button.onclick = ui.newEntryForm.bind(ui);
+
+  ui.depthGauge.adjustDisplay();
+  setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
+
+  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
+
 };
 
 window.onload = app;

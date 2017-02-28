@@ -1,8 +1,259 @@
-#google-map-container{
-  width: 500px;
-  height: 500px;
+@font-face {
+  font-family: "Arca";
+  src: url('build/ArcaMajora-Heavy.ttf');
 }
+
+
+.bar-display {
+  background-color: tomato;
+  width: 15px;
+  display: inline-block;
+  margin: 5px 5px;
+}
+
+
+#navLinks {
+      text-align: center;
+      width: 550px;
+}
+
+#navLinks ul {
+  margin-left: 17px;
+  padding: 0px;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+#navLinks ul li {
+  float: left;
+  text-align: center;
+  margin: 8px;
+  list-style: none;
+  cursor: pointer;
+  background-color: #CCCCCC;
+  padding: 3px;
+  border-radius: 50%;
+}
+
+#navLinks ul li:hover {
+  background-color: #FFFF00;
+}
+
+#navLinks ul li.active {
+  background-color: #333333;
+  color: #FFFFFF;
+  outline-width: 7px;
+}
+
+#navLinks ul li.active:hover {
+  background-color: #484848;
+  color: #FFFFFF;
+}
+
+#paperclip-icon{
+  height: 13px;
+  width: 13px;
+}
+
+/*-------------BACKGROUND----------------*/
+
+html {
+  background: url(http://i.imgur.com/OvkZtqS.jpg) no-repeat center center fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  background: linear-gradient (#174085, #174085);
+}
+
+
+
+
+/* ----------HEADER------*/
+
+#header {
+  width:1319px;
+  height: 150px;
+/*  background-color: green;*/
+}
+
+
+/* ----------JOURNAL CONTAINER-----------*/
+
+
+#journal-container {
+  background-color: #3dd6ec;
+  opacity: 0.6;
+  height: 500px;
+  width: 350px;
+  position: relative;
+  float: left;
+}
+
+#new-content-input {
+  background-color: #0b1033;
+  width: 345px;
+  height: 250px;
+  font-size: 26px;
+  font-family: 'Roboto', sans-serif;
+  color: cyan;
+  border: 0px;
+}
+
+#submit-button {
+  width: 350px;
+  border: none;
+  font-family: 'Lantinghei TC';
+  font-size: 17px;
+}
+
+#update-button {
+  position: relative;
+}
+
+
+
+
+/* ------------JOUNRNAL SELECT DROPDOWN -------*/
+
+#journal-select-container {
+/*  background-color: #a9f0ff;*/
+  width: 160px;
+  height: 500px;
+  float: left;
+  background-image: url(http://i.imgur.com/CXier06.jpg);
+
+}
+
+#entry-select {
+  width: 160px;
+  height: 25px;
+  border: none;
+  padding-left: 7px;
+  -webkit-appearance: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+/*---------------JOURNAL BUTTON CONTRAINER -------------*/
+
+#journal-button-container {
+  background-color: #fdd559;
+  height: 500px;
+  width: 40px;
+  float: left;
+}
+
+#add-new-entry {
+  background: transparent;
+  background-image: url(http://i.imgur.com/bR2l5IW.png);
+  border: none;
+  height: 480px;
+  width: 39px;
+}
+
+
+/*--------------MAP  WRAPPER---------*/
+
+#map-wrapper {
+/*  background-color: orange;*/
+  width: 350px;
+  float: right;
+  position: relative;
+  bottom: 500px;
+  right: 95px;
+
+}
+
+
+#google-map-container{
+  width: 350px;
+  height: 341px;
+}
+
 
 #user-location-button{
   z-index: 9999;
+  width: 350px;
+  border: none;
+}
+
+
+/*-------------- NEWS STORY CONTAINER -------------*/
+
+
+#news-story-container {
+  width: 2600px;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.5s ease-in-out;
+}
+
+#news-story-container div {
+  float: left;
+  width: 260px;
+  height: 350px;
+  white-space: normal;
+  font-size: 20px;
+}
+
+#news-story-container div p {
+  padding-left: 8px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+  margin: 0px;
+}
+
+#news-story-container div p a {
+  text-decoration: none;
+  font-family: 'Lantinghei TC';
+  font-size: 18px;
+  color: #291e47;
+}
+
+
+#ultra-news-story-container{
+  width: 260px;
+  height: 355px;
+  border: 5px black solid;
+  border-top: none;
+  overflow: hidden;
+/*  display: inline-block;*/
+background-color: white;
+font-style: none;
+
+}
+
+/*-----------------------FAM MESSAGES ----------------------*/
+
+#fam-messages {
+  height:140px;
+  width: 620px;
+  background-color: white;
+  float: left;
+  opacity: 0.6;
+}
+
+
+/*---------- WIDGET WRAPPER ---------*/
+
+#number-display {
+  margin-top: 0px
+}
+
+#widget-container {
+  height: 500px;
+  width: 150px;
+  background-color: #90c5c9;
+  position: absolute;
+  left: 1177px;
+  bottom: 45px;
+}
+
+#widget-wrapper {
+  text-align: center;
+  width: 100px;
+  background-color: #90c5c9;
+  position: absolute;
+  bottom: 0;
+}
+
+#sonar-activate {
+  display: none;
 }
