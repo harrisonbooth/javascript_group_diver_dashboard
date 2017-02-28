@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -85,11 +85,11 @@ module.exports = JournalEntry;
 /***/ (function(module, exports, __webpack_require__) {
 
 var JournalEntryList = __webpack_require__(2);
-var MissionUpdate = __webpack_require__(7);
+var MissionUpdate = __webpack_require__(5);
 var JournalEntry = __webpack_require__(0);
-var NumberWidget = __webpack_require__(6);
-var MapWrapper = __webpack_require__(3);
-var NewsUI = __webpack_require__(8);
+var NumberWidget = __webpack_require__(3);
+var MapWrapper = __webpack_require__(4);
+var NewsUI = __webpack_require__(7);
 
 var UI = function(){
   this.entryList = new JournalEntryList();
@@ -451,6 +451,82 @@ module.exports = JournalEntryList;
 /* 3 */
 /***/ (function(module, exports) {
 
+var NumberWidget = function(limit){
+  this.limit = limit;
+};
+
+NumberWidget.prototype = {
+
+  addWidget: function(container){
+    appendWidget(container);
+  },
+
+  appendWidget: function(container){
+    var container = container;
+    var widget = this.createWidget();
+
+    container.appendChild(widget);
+  },
+
+  createWidget: function(){
+    var numberDisplay = document.createElement('p');
+    numberDisplay.id = "number-display";
+
+    var bar1 = document.createElement('div');
+    var bar2 = document.createElement('div');
+    bar1.classList.add("bar-display");
+    bar2.classList.add("bar-display");
+
+    var widgetWrapper = document.createElement('div');
+    widgetWrapper.id = "widget-wrapper";
+
+    var number = this.limit;
+    numberDisplay.innerText = number * 10;
+    bar1.style.height = "50px";
+    bar1.style.transitionDuration = "5s";
+    bar2.style.height = "75px";
+    bar2.style.transitionDuration = "2s";
+
+    widgetWrapper.appendChild(bar2);
+    widgetWrapper.appendChild(bar1);
+    widgetWrapper.appendChild(numberDisplay);
+
+    return widgetWrapper;
+  },
+
+  adjustDisplay: function(){
+    var numberDisplay = document.getElementById('number-display');
+    var bar1 = document.getElementsByClassName('bar-display')[0];
+    var bar2 = document.getElementsByClassName('bar-display')[1];
+
+    var number = parseInt(numberDisplay.innerText);
+
+    if((number/10) > (this.limit/2)){
+      number -= (Math.random() * this.limit)/8;
+    } else {
+      number += (Math.random() * this.limit)/8;
+    }
+
+    numberDisplay.innerText = number.toFixed(0);
+
+    if((Math.random() * 1) > 0.4){
+      bar1.style.height = String(number/1000 * 200) + "px";
+      bar2.style.height = String(number/1000 * 0) + "px";
+    } else {
+      bar1.style.height = String(number/1000 * 0) + "px";
+      bar2.style.height = String(number/1000 * 200) + "px";
+    }
+
+  }
+}
+
+module.exports = NumberWidget;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
 var MapWrapper = function(coords, zoom, container){
   this.googleMap = new google.maps.Map(container, {
     center: coords,
@@ -566,7 +642,36 @@ module.exports = MapWrapper;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
+/***/ (function(module, exports) {
+
+var MissionUpdate = function(){};
+
+MissionUpdate.prototype = {
+  makeRequest: function(url, callback){
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onload = callback;
+    request.send();
+  },
+
+  listofMissions: function(callback){
+    this.makeRequest("http://localhost:3000/api/mission", function(){
+      if(this.status !== 200) return;
+      var jsonString = this.responseText;
+      var missionList = JSON.parse(jsonString);
+
+      callback(missionList);
+    })
+  }
+
+}
+
+module.exports = MissionUpdate;
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports) {
 
 var NewsStory = function(){}
@@ -600,139 +705,10 @@ module.exports = NewsStory;
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var UI = __webpack_require__(1);
-
-var app = function(){
-  var ui = new UI();
-  var select = document.getElementById('entry-select');
-  select.onchange = ui.selectEntry.bind(ui);
-
-  var button = document.getElementById('add-new-entry');
-  button.onclick = ui.newEntryForm.bind(ui);
-
-  ui.depthGauge.adjustDisplay();
-  setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
-
-  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
-
-};
-
-window.onload = app;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-var NumberWidget = function(limit){
-  this.limit = limit;
-};
-
-NumberWidget.prototype = {
-
-  addWidget: function(container){
-    appendWidget(container);
-  },
-
-  appendWidget: function(container){
-    var container = container;
-    var widget = this.createWidget();
-
-    container.appendChild(widget);
-  },
-
-  createWidget: function(){
-    var numberDisplay = document.createElement('p');
-    numberDisplay.id = "number-display";
-
-    var bar1 = document.createElement('div');
-    var bar2 = document.createElement('div');
-    bar1.classList.add("bar-display");
-    bar2.classList.add("bar-display");
-
-    var widgetWrapper = document.createElement('div');
-    widgetWrapper.id = "widget-wrapper";
-
-    var number = this.limit;
-    numberDisplay.innerText = number * 10;
-    bar1.style.height = "50px";
-    bar1.style.transitionDuration = "5s";
-    bar2.style.height = "75px";
-    bar2.style.transitionDuration = "2s";
-
-    widgetWrapper.appendChild(bar2);
-    widgetWrapper.appendChild(bar1);
-    widgetWrapper.appendChild(numberDisplay);
-
-    return widgetWrapper;
-  },
-
-  adjustDisplay: function(){
-    var numberDisplay = document.getElementById('number-display');
-    var bar1 = document.getElementsByClassName('bar-display')[0];
-    var bar2 = document.getElementsByClassName('bar-display')[1];
-
-    var number = parseInt(numberDisplay.innerText);
-
-    if((number/10) > (this.limit/2)){
-      number -= (Math.random() * this.limit)/8;
-    } else {
-      number += (Math.random() * this.limit)/8;
-    }
-
-    numberDisplay.innerText = number.toFixed(0);
-
-    if((Math.random() * 1) > 0.4){
-      bar1.style.height = String(number/1000 * 200) + "px";
-      bar2.style.height = String(number/1000 * 0) + "px";
-    } else {
-      bar1.style.height = String(number/1000 * 0) + "px";
-      bar2.style.height = String(number/1000 * 200) + "px";
-    }
-
-  }
-}
-
-module.exports = NumberWidget;
-
-
-/***/ }),
 /* 7 */
-/***/ (function(module, exports) {
-
-var MissionUpdate = function(){};
-
-MissionUpdate.prototype = {
-  makeRequest: function(url, callback){
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.onload = callback;
-    request.send();
-  },
-
-  listofMissions: function(callback){
-    this.makeRequest("http://localhost:3000/api/mission", function(){
-      if(this.status !== 200) return;
-      var jsonString = this.responseText;
-      var missionList = JSON.parse(jsonString);
-
-      callback(missionList);
-    })
-  }
-
-}
-
-module.exports = MissionUpdate;
-
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var NewsStory = __webpack_require__(4);
+var NewsStory = __webpack_require__(6);
 
 var NewsUI = function(){
   this.newsStory = new NewsStory();
@@ -840,6 +816,30 @@ NewsUI.prototype = {
 }
 
 module.exports = NewsUI;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var UI = __webpack_require__(1);
+
+var app = function(){
+  var ui = new UI();
+  var select = document.getElementById('entry-select');
+  select.onchange = ui.selectEntry.bind(ui);
+
+  var button = document.getElementById('add-new-entry');
+  button.onclick = ui.newEntryForm.bind(ui);
+
+  ui.depthGauge.adjustDisplay();
+  setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
+
+  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
+
+};
+
+window.onload = app;
 
 
 /***/ })

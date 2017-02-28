@@ -12,7 +12,7 @@
 }
 
 #navLinks ul {
-  margin: 0px;
+  margin-left: 17px;
   padding: 0px;
   display: inline-block;
   margin-top: 6px;
@@ -49,6 +49,15 @@
   width: 13px;
 }
 
+/*-------------BACKGROUND----------------*/
+
+html {
+  background: url(http://i.imgur.com/OvkZtqS.jpg) no-repeat center center fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  background: linear-gradient (#174085, #174085);
+}
+
 
 
 
@@ -57,28 +66,43 @@
 #header {
   width:1319px;
   height: 130px;
-  background-color: green;
+/*  background-color: green;*/
 }
 
 
 /* ----------JOURNAL CONTAINER-----------*/
 
 #journal-container {
-  background-color: red;
+  background-color: #3dd6ec;
+  opacity: 0.40;
   height: 500px;
   width: 350px;
   position: relative;
   float: left;
 }
 
+#new-content-input {
+  background-color: blue;
+  width: 345px;
+  height: 250px;
+  font-size: 26px;
+  color: pink;
+}
+
+#submit-button {
+  width: 350px;
+  border: none;
+}
+
 
 /* ------------JOUNRNAL SELECT DROPDOWN -------*/
 
 #journal-select-container {
-  background-color: pink;
+/*  background-color: #a9f0ff;*/
   width: 160px;
   height: 500px;
   float: left;
+  background-image: url(http://i.imgur.com/CXier06.jpg);
 
 }
 
@@ -89,17 +113,25 @@
 /*---------------JOURNAL BUTTON CONTRAINER -------------*/
 
 #journal-button-container {
-  background-color: yellow;
+  background-color: #fdd559;
   height: 500px;
   width: 40px;
   float: left;
+}
+
+#add-new-entry {
+/*  background: transparent;*/
+  background-image: url(http://i.imgur.com/KuzosFk.png);
+  border: none;
+  height: 480px;
+  width: 39px;
 }
 
 
 /*--------------MAP  WRAPPER---------*/
 
 #map-wrapper {
-  background-color: orange;
+/*  background-color: orange;*/
   width: 350px;
   float: right;
   position: relative;
@@ -117,6 +149,8 @@
 
 #user-location-button{
   z-index: 9999;
+  width: 350px;
+  border: none;
 }
 
 
@@ -134,8 +168,22 @@
   width: 260px;
   height: 350px;
   white-space: normal;
-
+  font-size: 20px;
 }
+
+#news-story-container div p {
+  padding-left: 8px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+  margin: 0px;
+}
+
+#news-story-container div p a {
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  color: #291e47;
+}
+
 
 #ultra-news-story-container{
   width: 260px;
@@ -143,7 +191,8 @@
   border: 5px black solid;
   overflow: hidden;
 /*  display: inline-block;*/
-background-color: purple;
+background-color: white;
+font-style: none;
 }
 
 /*-----------------------FAM MESSAGES ----------------------*/
@@ -151,8 +200,9 @@ background-color: purple;
 #fam-messages {
   height:140px;
   width: 620px;
-  background-color: lightblue;
+  background-color: white;
   float: left;
+  opacity: 0.6;
 }
 
 
