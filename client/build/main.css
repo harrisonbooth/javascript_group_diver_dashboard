@@ -80,8 +80,8 @@ html {
 
 
 #journal-container {
-  background-color: #3dd6ec;
-  opacity: 0.6;
+  background-color: #D9FFFC;
+  opacity: 0.7;
   height: 500px;
   width: 350px;
   position: relative;
@@ -89,12 +89,12 @@ html {
 }
 
 #new-content-input {
-  background-color: #0b1033;
+  background-color: #ADE2FF;
   width: 350px;
   height: 460px;
   font-size: 26px;
   font-family: 'Roboto', sans-serif;
-  color: cyan;
+  color: #2A1840;
   border: 0px;
 }
 
@@ -110,12 +110,28 @@ html {
 }
 
 
+h1#entry-timestamp-view {
+  font-family: "Arca";
+  padding-left: 7px;
+  font-size: 36px;
+
+}
+
+p#entry-content-view {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  padding-left: 7px;
+
+}
+
+
 
 
 /* ------------JOUNRNAL SELECT DROPDOWN -------*/
 
 #journal-select-container {
-  background-color: #0b1033;
+/*  background-color: #0b1033;*/
+  background-color: white;
   width: 160px;
   height: 511px;
   float: left;
@@ -130,6 +146,7 @@ html {
   border: none;
   padding-left: 7px;
   -webkit-appearance: none;
+  font-size: 14px;
   font-family: 'Roboto', sans-serif;
 }
 
