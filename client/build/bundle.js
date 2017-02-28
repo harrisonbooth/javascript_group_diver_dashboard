@@ -157,7 +157,8 @@ var myGameArea = {
     this.canvas.height = (tile_height * grid_height + (tile_gap * (grid_height - 1))); // canvas height
     this.context = this.canvas.getContext("2d"); //? sets canvas to 2D mode
     this.canvas.id = "canvas";
-    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+    document.getElementById("game-container").appendChild(this.canvas);
+    // document.body.insertBefore(this.canvas, document.body.childNodes[0]);
     this.frameNo = 0;
     this.interval = setInterval(updateGameArea, 20);
     window.addEventListener('click', function (e) { // when click, do something

@@ -90,7 +90,7 @@ html {
 
 #new-content-input {
   background-color: #0b1033;
-  width: 345px;
+  width: 350px;
   height: 460px;
   font-size: 26px;
   font-family: 'Roboto', sans-serif;
@@ -165,7 +165,7 @@ html {
   float: right;
   position: relative;
   bottom: 500px;
-  right: 95px;
+  right: 74px;
 
 }
 
@@ -231,10 +231,11 @@ font-style: none;
 
 #fam-messages {
   height:140px;
-  width: 620px;
+  width: 616px;
   background-color: white;
   float: left;
   opacity: 0.6;
+  margin-left: 4px;
 }
 
 
@@ -268,5 +269,13 @@ font-style: none;
 #canvas{
   background: -webkit-radial-gradient(circle, #1a82f7, #326464);
   color:#d9d9d9;
-  float: right;
+
+}
+
+#game-container {
+  width: 275px;
+  height: 275px;
+  position: relative;
+  left: 1200px;
+  bottom: 275px;
 }
