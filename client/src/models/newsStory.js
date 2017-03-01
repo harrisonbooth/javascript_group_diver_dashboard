@@ -20,7 +20,7 @@ NewsStory.prototype = {
 
       callback(newsArray);
     });
-  };
+  }
 };
 
 

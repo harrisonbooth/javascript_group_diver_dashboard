@@ -16,7 +16,7 @@ MissionUpdate.prototype = {
 
       callback(missionList);
     })
-  };
+  } 
 
 };
 
