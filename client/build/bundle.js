@@ -75,8 +75,6 @@ var JournalEntry = function(content){
   this.timestamp = Date().substring(0, 24);
 }
 
-
-
 module.exports = JournalEntry;
 
 
@@ -1044,9 +1042,9 @@ MissionUpdate.prototype = {
 
       callback(missionList);
     })
-  }
+  } 
 
-}
+};
 
 module.exports = MissionUpdate;
 
@@ -1068,18 +1066,17 @@ NewsStory.prototype = {
     },
 
 
-    newsStoryResponse: function(callback){
-      this.makeRequest("https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=50987132659b4da4bc4dd9bf9b059612", function(){
-        if(this.status !== 200) return;
-        var jsonString = this.responseText;
-        var newsResults = JSON.parse(jsonString);
-        newsArray = newsResults.articles;
+  newsStoryResponse: function(callback){
+    this.makeRequest("https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=50987132659b4da4bc4dd9bf9b059612", function(){
+      if(this.status !== 200) return;
+      var jsonString = this.responseText;
+      var newsResults = JSON.parse(jsonString);
+      newsArray = newsResults.articles;
 
-        callback(newsArray);
-      });
-    }
+      callback(newsArray);
+    });
   }
-
+};
 
 
 module.exports = NewsStory;
@@ -1206,7 +1203,6 @@ module.exports = NewsUI;
 var UI = __webpack_require__(2);
 var Game = __webpack_require__(1);
 
-
 var app = function(){
 
   var ui = new UI();
@@ -1225,7 +1221,6 @@ var app = function(){
   var game = new Game();
 
 };
-
 
 window.onload = app;
 
