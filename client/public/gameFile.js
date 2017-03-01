@@ -1,15 +1,13 @@
 
-var titleWidth = 30; // width of tiles
-var titleHeight = 30; // height of tiles
+var titleWidth = 30;
+var titleHeight = 30;
+var titleGap = 5;
 
-var titleGap = 5; // gap between the tiles
-
-var mineArray = []; // the grid
-
+var mineArray = [];
 var mineTotal = 20;
 var minesCounter;
-var randomNum;
 
+var randomNum;
 var mineCheckCounter;
 var mineDecider;
 
@@ -17,8 +15,8 @@ var gridWidth = 8;
 var gridHeight = 8;
 
 var img;
-var choice = false;
 
+var choice = false;
 var alive = true;
 
 var particles = [];
@@ -33,13 +31,12 @@ var tileMap = [[1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
-[1,1,1,1,1,1,1,1]] // test tileMap
+[1,1,1,1,1,1,1,1]]
 
 function startGame() {
-
   var myGamePiece; // what is the mine square called when made
 
-  //START initialize for loop (this actually makes the gird)
+  //START initialize for loop (this actually makes the grid)
   for(var j = 0; j < gridHeight; j++){
     for(var i = 0; i < gridWidth; i++){
      myGamePiece = new component(titleWidth, titleHeight, ((titleWidth + titleGap) * i), ((titleHeight + titleGap) * j),i,j);
@@ -47,7 +44,6 @@ function startGame() {
    }
  }
  //END of initialize
-// minesCounter = Math.floor((Math.random() * 20) + 1);
 
 minesCounter = mineTotal;
 
@@ -61,18 +57,18 @@ while (minesCounter !== 0){
   }
 }
 
- myGameArea.start(); // this makes canvas and posiitons everything
+ myGameArea.start();
 }
 
 var myGameArea = {
-  canvas : document.createElement("canvas"), // the canvas
+  canvas : document.createElement("canvas"),
   start : function() {
-    this.canvas.width = (titleWidth * gridWidth + (titleGap * (gridWidth - 1))); // canvas width
-    this.canvas.height = (titleHeight * gridHeight + (titleGap * (gridHeight - 1))); // canvas height
-    this.context = this.canvas.getContext("2d"); //? sets canvas to 2D mode
+    this.canvas.width = (titleWidth * gridWidth + (titleGap * (gridWidth - 1)));
+    this.canvas.height = (titleHeight * gridHeight + (titleGap * (gridHeight - 1)));
+    this.context = this.canvas.getContext("2d"); 
     this.canvas.id = "canvas";
     document.getElementById("game-container").appendChild(this.canvas);
-    // document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+
     this.frameNo = 0;
     this.interval = setInterval(updateGameArea, 20);
     window.addEventListener('click', function (e) { // when click, do something
