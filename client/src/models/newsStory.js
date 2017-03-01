@@ -8,8 +8,7 @@ NewsStory.prototype = {
       request.open('GET', url);
       request.onload = callback;
       request.send();
-    },
-
+  },
 
   newsStoryResponse: function(callback){
     this.makeRequest("https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=50987132659b4da4bc4dd9bf9b059612", function(){
