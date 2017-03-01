@@ -11,10 +11,10 @@ var minesCounter;
 var randomNum;
 
 var mineCheckCounter;
-var mine_decider;
+var mineDecider;
 
-var grid_width = 8;
-var grid_height = 8;
+var gridWidth = 8;
+var gridHeight = 8;
 
 var img;
 var choice = false;
@@ -24,24 +24,24 @@ var alive = true;
 var particles = [];
 var particleCount = 100;
 
-var end_display_once = false;
+var endDisplayOnce = false;
 
-var tile_map = [[1,1,1,1,1,1,1,1],
+var tileMap = [[1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1],
-[1,1,1,1,1,1,1,1]] // test tile_map
+[1,1,1,1,1,1,1,1]] // test tileMap
 
 function startGame() {
 
   var myGamePiece; // what is the mine square called when made
 
   //START initialize for loop (this actually makes the gird)
-  for(var j = 0; j < grid_height; j++){
-    for(var i = 0; i < grid_width; i++){
+  for(var j = 0; j < gridHeight; j++){
+    for(var i = 0; i < gridWidth; i++){
      myGamePiece = new component(titleWidth, titleHeight, ((titleWidth + titleGap) * i), ((titleHeight + titleGap) * j),i,j);
      mineArray.push(myGamePiece);
    }
@@ -52,7 +52,7 @@ function startGame() {
 minesCounter = mineTotal;
 
 while (minesCounter !== 0){
-  randomNum = Math.floor((Math.random() * (grid_width * grid_height)));
+  randomNum = Math.floor((Math.random() * (gridWidth * gridHeight)));
   if (mineArray[randomNum].hasMine === true){
 
   } else{
@@ -67,8 +67,8 @@ while (minesCounter !== 0){
 var myGameArea = {
   canvas : document.createElement("canvas"), // the canvas
   start : function() {
-    this.canvas.width = (titleWidth * grid_width + (titleGap * (grid_width - 1))); // canvas width
-    this.canvas.height = (titleHeight * grid_height + (titleGap * (grid_height - 1))); // canvas height
+    this.canvas.width = (titleWidth * gridWidth + (titleGap * (gridWidth - 1))); // canvas width
+    this.canvas.height = (titleHeight * gridHeight + (titleGap * (gridHeight - 1))); // canvas height
     this.context = this.canvas.getContext("2d"); //? sets canvas to 2D mode
     this.canvas.id = "canvas";
     document.getElementById("game-container").appendChild(this.canvas);
@@ -85,9 +85,9 @@ var myGameArea = {
                 mineArray[i].img.src = "./images/rsz_mine_original.png";
                 alive = false;
               } else {
-                mine_decider = checkAround(i);
+                mineDecider = checkAround(i);
                 mineArray[i].clicked = true;
-                mineArray[i].close_mines = mine_decider;
+                mineArray[i].close_mines = mineDecider;
                 mineArray[i].changeSource = true;
                 mineArray[i].update();
               }
@@ -114,7 +114,7 @@ var myGameArea = {
 
         }
         while (minesCounter !== 0){
-          randomNum = Math.floor((Math.random() * (grid_width * grid_height)));
+          randomNum = Math.floor((Math.random() * (gridWidth * gridHeight)));
           if (mineArray[randomNum].hasMine === true){
 
           } else{
@@ -231,7 +231,7 @@ function checkAround(num){
     if (mineArray[num-1].hasMine === true){
       mineCheckCounter += 1;
     }
-    if (mineArray[num].y_in_grid !== grid_height - 1){
+    if (mineArray[num].y_in_grid !== gridHeight - 1){
     //look DL
     if (mineArray[num+7].hasMine === true){
       mineCheckCounter += 1;
@@ -243,26 +243,26 @@ if (mineArray[num].y_in_grid !== 0){
     if (mineArray[num-8].hasMine === true){
       mineCheckCounter += 1;
     }
-    if (mineArray[num].x_in_grid !== grid_width - 1){
+    if (mineArray[num].x_in_grid !== gridWidth - 1){
     //look UR
     if (mineArray[num-7].hasMine === true){
       mineCheckCounter += 1;
     }
   }
 }
-if (mineArray[num].x_in_grid !== grid_width - 1){
+if (mineArray[num].x_in_grid !== gridWidth - 1){
     //look R
     if (mineArray[num+1].hasMine === true){
       mineCheckCounter += 1;
     }
-    if (mineArray[num].y_in_grid !== grid_height - 1){
+    if (mineArray[num].y_in_grid !== gridHeight - 1){
     //look DR
     if (mineArray[num+9].hasMine === true){
       mineCheckCounter += 1;
     }
   }
 }
-if (mineArray[num].y_in_grid !== grid_height - 1){
+if (mineArray[num].y_in_grid !== gridHeight - 1){
     //look D
     if (mineArray[num+8].hasMine === true){
       mineCheckCounter += 1;
@@ -278,8 +278,8 @@ for(var i=0; i<particleCount;i++)
 
 function particle() {
 
-  this.x = Math.random() * (titleWidth * grid_width + (titleGap * (grid_width - 1)));
-  this.y = (titleHeight * grid_height + (titleGap * (grid_height - 1))) + Math.random() * 300;
+  this.x = Math.random() * (titleWidth * gridWidth + (titleGap * (gridWidth - 1)));
+  this.y = (titleHeight * gridHeight + (titleGap * (gridHeight - 1))) + Math.random() * 300;
   this.speed = 2 + Math.random() * 5;
   this.radius = Math.random() * 30;
   this.opacity = (Math.random() * 100) / 1000;
@@ -300,9 +300,9 @@ function updateGameArea() {
   }
   if (alive === true){}
   else {
-    if (end_display_once === false){
+    if (endDisplayOnce === false){
       console.log("you hit a mine, return to the sub");
-      end_display_once = true;
+      endDisplayOnce = true;
     }
   }
 }
