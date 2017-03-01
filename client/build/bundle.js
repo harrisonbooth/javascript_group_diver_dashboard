@@ -75,8 +75,6 @@ var JournalEntry = function(content){
   this.timestamp = Date().substring(0, 24);
 }
 
-
-
 module.exports = JournalEntry;
 
 
@@ -1026,64 +1024,13 @@ module.exports = MapWrapper;
 /* 7 */
 /***/ (function(module, exports) {
 
-var MissionUpdate = function(){};
-
-MissionUpdate.prototype = {
-  makeRequest: function(url, callback){
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.onload = callback;
-    request.send();
-  },
-
-  listofMissions: function(callback){
-    this.makeRequest("http://localhost:3000/api/mission", function(){
-      if(this.status !== 200) return;
-      var jsonString = this.responseText;
-      var missionList = JSON.parse(jsonString);
-
-      callback(missionList);
-    })
-  }
-
-}
-
-module.exports = MissionUpdate;
-
+throw new Error("Module parse failed: /Users/user/Desktop/Group_Project/diver_dashboard/client/src/models/missionUpdate.js Unexpected token (19:3)\nYou may need an appropriate loader to handle this file type.\n|       callback(missionList);\n|     })\n|   };\n| \n| };");
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-var NewsStory = function(){}
-
-
-NewsStory.prototype = {
-
-  makeRequest: function(url, callback){
-      var request = new XMLHttpRequest();
-      request.open('GET', url);
-      request.onload = callback;
-      request.send();
-    },
-
-
-    newsStoryResponse: function(callback){
-      this.makeRequest("https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=50987132659b4da4bc4dd9bf9b059612", function(){
-        if(this.status !== 200) return;
-        var jsonString = this.responseText;
-        var newsResults = JSON.parse(jsonString);
-        newsArray = newsResults.articles;
-
-        callback(newsArray);
-      });
-    }
-  }
-
-
-
-module.exports = NewsStory;
-
+throw new Error("Module parse failed: /Users/user/Desktop/Group_Project/diver_dashboard/client/src/models/newsStory.js Unexpected token (23:3)\nYou may need an appropriate loader to handle this file type.\n|       callback(newsArray);\n|     });\n|   };\n| };\n| ");
 
 /***/ }),
 /* 9 */

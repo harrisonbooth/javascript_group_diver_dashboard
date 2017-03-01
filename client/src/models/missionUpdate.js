@@ -16,8 +16,8 @@ MissionUpdate.prototype = {
 
       callback(missionList);
     })
-  }
+  };
 
-}
+};
 
 module.exports = MissionUpdate;
