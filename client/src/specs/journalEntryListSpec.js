@@ -10,7 +10,7 @@ describe('Journal Entry List', function(){
     it('should not be null', function(){
       assert.notEqual(null, entryList);
     });
-
+    
   });
 
 });

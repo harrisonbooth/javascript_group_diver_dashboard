@@ -1,6 +1,5 @@
 var UI = require('../src/views/masterUI');
-var Game = require('./game_File');
-
+var Game = require('./gameFile');
 
 var app = function(){
 
@@ -20,6 +19,5 @@ var app = function(){
   var game = new Game();
 
 };
-
 
 window.onload = app;
