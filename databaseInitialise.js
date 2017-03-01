@@ -11,12 +11,32 @@ db.journalEntries.insert(
     },
     {
       entryNumber: 2,
-      timestamp: 'Fri Feb 24 2098 14:30:12',
+      timestamp: 'Fri Feb 24 2016 14:30:12',
       content: 'This mission has really dragged on, I haven\'t used this nearly enough!...'
     },
     {
+      entryNumber: 3,
+      timestamp: 'Sat Feb 25 2016 14:40:45',
+      content: 'Ran into the Trident nuclear sub the other day, we surfaced and exchanged numbers... should see the curves on that sub...'
+    },
+    {
+      entryNumber: 4,
+      timestamp: 'Sun Feb 26 2016 14:50:12',
+      content: 'I saw a weird fish the today, bright orange with three eyes... crazy...'
+    },
+    {
+      entryNumber: 5,
+      timestamp: 'Mon Feb 27 2017 15:10:45',
+      content: 'Piloted the submarine into the Mariana Trench; not sure how long I was down there, probably just a few days.'
+    },
+    {
+      entryNumber: 6,
+      timestamp: 'Tue Feb 28 2017 15:20:46',
+      content: 'Saw a cute mermaid earlier, she swam away: oh well, plenty of fish in the sea! (better check the oxygen tanks)'
+    },
+    {
       entryNumber: "entry number counter",
-      currentEntryNumber: 2
+      currentEntryNumber: 6
     }
   ]
 );
