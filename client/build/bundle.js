@@ -1206,7 +1206,6 @@ module.exports = NewsUI;
 var UI = __webpack_require__(2);
 var Game = __webpack_require__(1);
 
-
 var app = function(){
 
   var ui = new UI();
@@ -1225,7 +1224,6 @@ var app = function(){
   var game = new Game();
 
 };
-
 
 window.onload = app;
 
