@@ -14,7 +14,7 @@ First large scale JavaScript project, as well as first project working as a grou
     * Access the Google maps api to display map with the current location of the user.
     * Button to take the user back to their geolocation.
     * Header displaying the current date and time updating every second.
-    
+
 ---
 
 ### Instructions to run
@@ -23,8 +23,8 @@ First large scale JavaScript project, as well as first project working as a grou
   - Run `mongod` in terminal.
   - Run `npm start` in both the top level and client folders.
   - Open `http://localhost:3000` in your chosen browser (tested in chrome).
-  
---- 
+
+---
 
 ### Dependecies
   - Webpack
@@ -33,3 +33,7 @@ First large scale JavaScript project, as well as first project working as a grou
   - Express
   - Mocha
   - Body-parser
+
+### Finished product
+
+![alt text](http://i.imgur.com/RFmViua.jpg)
