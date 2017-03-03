@@ -33,6 +33,8 @@ First large scale JavaScript project, as well as first project working as a grou
   - Express
   - Mocha
   - Body-parser
+  
+---
 
 ### Finished product
 
