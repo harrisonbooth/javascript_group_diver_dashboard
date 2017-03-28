@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -400,13 +400,13 @@ module.exports = startGame;
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var JournalEntryList = __webpack_require__(3);
-var MissionUpdate = __webpack_require__(7);
+var JournalEntryList = __webpack_require__(4);
+var MissionUpdate = __webpack_require__(8);
 var JournalEntry = __webpack_require__(0);
-var NumberWidget = __webpack_require__(4);
-var dateTimeWidget = __webpack_require__(5)
-var MapWrapper = __webpack_require__(6);
-var NewsUI = __webpack_require__(9);
+var NumberWidget = __webpack_require__(5);
+var dateTimeWidget = __webpack_require__(6)
+var MapWrapper = __webpack_require__(7);
+var NewsUI = __webpack_require__(10);
 
 var UI = function(){
   this.entryList = new JournalEntryList();
@@ -670,6 +670,35 @@ module.exports = UI;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var UI = __webpack_require__(2);
+var Game = __webpack_require__(1);
+
+var app = function(){
+
+  var ui = new UI();
+  var select = document.getElementById('entry-select');
+  select.onchange = ui.selectEntry.bind(ui);
+
+  var button = document.getElementById('add-new-entry');
+  button.onclick = ui.newEntryForm.bind(ui);
+
+    // ui.depthGauge.adjustDisplay();
+    // setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
+
+  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
+
+  setInterval(ui.dateTimeWidget.updateWidget.bind(ui.dateTimeWidget), 1000);
+  var game = new Game();
+
+};
+
+window.onload = app;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var JournalEntry = __webpack_require__(0);
 
 var JournalEntryList = function(){}
@@ -768,7 +797,7 @@ module.exports = JournalEntryList;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 // var NumberWidget = function(limit){
@@ -844,7 +873,7 @@ module.exports = JournalEntryList;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 var dateTimeWidget = function(container){
@@ -906,7 +935,7 @@ module.exports = dateTimeWidget;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 var MapWrapper = function(coords, zoom, container){
@@ -1024,7 +1053,7 @@ module.exports = MapWrapper;
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 var MissionUpdate = function(){};
@@ -1053,7 +1082,7 @@ module.exports = MissionUpdate;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 var NewsStory = function(){}
@@ -1085,10 +1114,10 @@ module.exports = NewsStory;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var NewsStory = __webpack_require__(8);
+var NewsStory = __webpack_require__(9);
 
 var NewsUI = function(){
   this.newsStory = new NewsStory();
@@ -1196,35 +1225,6 @@ NewsUI.prototype = {
 }
 
 module.exports = NewsUI;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var UI = __webpack_require__(2);
-var Game = __webpack_require__(1);
-
-var app = function(){
-
-  var ui = new UI();
-  var select = document.getElementById('entry-select');
-  select.onchange = ui.selectEntry.bind(ui);
-
-  var button = document.getElementById('add-new-entry');
-  button.onclick = ui.newEntryForm.bind(ui);
-
-    // ui.depthGauge.adjustDisplay();
-    // setInterval(ui.depthGauge.adjustDisplay.bind(ui.depthGauge), 100);
-
-  setInterval(ui.newsUI.scrollNews.bind(ui.newsUI), 5000);
-
-  setInterval(ui.dateTimeWidget.updateWidget.bind(ui.dateTimeWidget), 1000);
-  var game = new Game();
-
-};
-
-window.onload = app;
 
 
 /***/ })
