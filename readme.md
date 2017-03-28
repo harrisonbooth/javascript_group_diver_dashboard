@@ -1,6 +1,6 @@
-#JavaScript Group Project
-##Deep Sea Diver Information Dashboard.
-###Information dashboard and journal for submariners.
+# JavaScript Group Project
+## Deep Sea Diver Information Dashboard.
+### Information dashboard and journal for submariners.
 First large scale JavaScript project, as well as first project working as a group.
   - Backend
     * Journal database with journal entries and entry number counter.
